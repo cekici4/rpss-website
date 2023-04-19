@@ -1,0 +1,43 @@
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  
+  html {
+    height: -webkit-fill-available;
+  }
+  
+  main {
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .dropdown-toggle { outline: 0; }
+  
+  .text-lg {
+  font-size: 18px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+#file-list a:hover {
+  text-decoration: underline;
+}
+  
+  
