@@ -246,9 +246,8 @@ async function getFunctionList(endpoint) {
   fetchFilesButton.disabled = false;
 }
 
-
-	
-
-
 const fetchFilesButton = document.getElementById('fetch-files-button');
 fetchFilesButton.addEventListener('click', getContent('https://rpss:8443/share'));
+
+
+  

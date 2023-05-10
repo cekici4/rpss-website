@@ -6,7 +6,7 @@
 <!DOCTYPE html>
     <html lang="en">
         <!-- Head start -->
-        <?php include '../style/head.php'; ?>
+        <?php include './style/head.php'; ?>
         <!-- Head end -->
 
         <!-- Body start -->
@@ -14,7 +14,7 @@
             <!-- Main start -->
             <main class="d-flex flex-nowrap">
             <!-- Sidebar start -->
-            <?php include '../style/sidebar.php'; ?>    
+            <?php include './style/sidebar.php'; ?>    
             <!-- Sidebar end -->
 
             <!-- Section start -->
@@ -35,5 +35,11 @@
             <!-- Main end -->
         </body>
         <!-- Body end -->
+
+        <!-- Script start -->
+        <script>
+            
+        </script>
+        <!-- Script end -->
 </html>
 <!-- End of HTML document -->

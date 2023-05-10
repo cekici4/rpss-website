@@ -1,7 +1,8 @@
+
 <aside>
     <!-- Sidebar Head start -->
     <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32">
                 <use xlink:href="#bootstrap"></use>
             </svg>
@@ -12,7 +13,7 @@
         <ul id="sidebar-nav" class="nav nav-pills flex-column mb-auto">
             <!-- Home List Item -->   
             <li class="nav-item" id="home">
-                <a href="../index.php" class="nav-link active" aria-current="page">
+                <a href="http://localhost:8012/rpss-website/main/index.php" class="nav-link text-white" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16">
                         <use xlink:href="#home"></use>
                     </svg>
@@ -21,7 +22,7 @@
             </li>
             <!-- Share List Item -->
             <li class="nav-item" id="share">
-                <a href="../share/index.php" class="nav-link text-white" onclick="getShareContent(event); console.log(&quot;Hello i am talking from html&quot;);">
+                <a href="http://localhost:8012/rpss-website/main/share/index.php" class="nav-item nav-link text-white" onclick="toggleActiveNavLinks(event); ">
                     <svg class="bi pe-none me-2" width="16" height="16">
                         <use xlink:href="#table"></use>
                     </svg>
@@ -54,18 +55,4 @@
     </div>
 </aside>
 
-<script>
-    // Get the list of nav links
-    const navLinks = document.querySelectorAll('.nav-link');
 
-    // Add the click event listener to each nav link
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Remove the active class from all nav links
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            // Add the active class to the clicked nav link
-            link.classList.add('active');
-        });
-    });
-</script>
