@@ -3,18 +3,21 @@
     This is the index.html and with that the main HTML file
     Created by: C.Ekici
  -->
+ 
 <!DOCTYPE html>
     <html lang="en">
         <!-- Head start -->
-        <?php include './style/head.php'; ?>
+        <head>
+            <?php include __DIR__ . '/style/head.php'; ?>
+        </head>
         <!-- Head end -->
 
         <!-- Body start -->
-        <body>
+        <body data-active-page="<?php echo $active_page; ?>">
             <!-- Main start -->
             <main class="d-flex flex-nowrap">
             <!-- Sidebar start -->
-            <?php include './style/sidebar.php'; ?>    
+            <?php include __DIR__ . '/style/sidebar.php'; ?>    
             <!-- Sidebar end -->
 
             <!-- Section start -->
@@ -28,8 +31,7 @@
                 integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
                 crossorigin="anonymous"
                 defer></script>
-            <script src="../assets/dist/js/bootstrap.bundle.min.js"
-                defer></script>
+            
             <!-- Scripts section end -->    
             </main>
             <!-- Main end -->

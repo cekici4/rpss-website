@@ -3,18 +3,22 @@
     This is the share index.html and with that the main share HTML file
     Created by: C.Ekici
  -->
+
 <!DOCTYPE html>
 	<html lang="en">
 	<!-- Head start -->
-	<?php include '../style/head.php'; ?>
+	<head>
+		<?php include __DIR__ . '/style/head.php'; ?>
+	</head>
 	<!-- Head end -->
 
 	<!-- Body start -->
-	<body>
+	<body data-active-page="<?php echo $active_page; ?>">
+
 		<!-- Main start -->
 		<main class="d-flex flex-nowrap">
 			<!-- Sidebar start -->
-			<?php include '../style/sidebar.php'; ?>
+			<?php include __DIR__ . '/style/sidebar.php'; ?>  
 			<!-- Sidebar end -->
 
 		<div class="container mt-5 mb-5">
@@ -38,8 +42,9 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-		crossorigin="anonymous"></script>
-	<script src="../code/main.js"></script>
+		crossorigin="anonymous">
+	</script>
+	
 	
 </body>
 

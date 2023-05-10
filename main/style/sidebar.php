@@ -13,19 +13,13 @@
         <ul id="sidebar-nav" class="nav nav-pills flex-column mb-auto">
             <!-- Home List Item -->   
             <li class="nav-item" id="home">
-                <a href="http://localhost:8012/rpss-website/main/index.php" class="nav-link text-white" aria-current="page">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#home"></use>
-                    </svg>
+                <a href="http://localhost:8012/rpss-website/main/home.php?page=home" class=" nav-link text-white" data-page="home">
                     Home
                 </a>
             </li>
             <!-- Share List Item -->
             <li class="nav-item" id="share">
-                <a href="http://localhost:8012/rpss-website/main/share/index.php" class="nav-item nav-link text-white" onclick="toggleActiveNavLinks(event); ">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#table"></use>
-                    </svg>
+                <a href="http://localhost:8012/rpss-website/main/share.php?page=share" class="nav-link text-white" data-page="share">
                     Share
                 </a>
             </li>
