@@ -13,13 +13,13 @@
         <ul id="sidebar-nav" class="nav nav-pills flex-column mb-auto">
             <!-- Home List Item -->   
             <li class="nav-item" id="home">
-                <a href="http://localhost:8012/rpss-website/main/home.php?page=home" class=" nav-link text-white" data-page="home">
+                <a href="https://rpss/home.php?page=home" class=" nav-link text-white" data-page="home">
                     Home
                 </a>
             </li>
             <!-- Share List Item -->
             <li class="nav-item" id="share">
-                <a href="http://localhost:8012/rpss-website/main/share.php?page=share" class="nav-link text-white" data-page="share">
+                <a href="https://rpss/share.php?page=share" class="nav-link text-white" data-page="share">
                     Share
                 </a>
             </li>
