@@ -15,9 +15,9 @@ body {
     overflow-y: hidden;
   }
   
-  .dropdown-toggle { outline: 0; }
+ .dropdown-toggle { outline: 0; }
   
-  .text-lg {
+ .text-lg {
   font-size: 18px;
 }
 
@@ -29,6 +29,7 @@ ul {
 
 li {
   margin: 10px 0;
+  cursor: pointer;
 }
 
 a {
@@ -40,4 +41,6 @@ a {
   text-decoration: underline;
 }
   
-  
+sidebar a:hover {
+	color: rgb(188, 66, 245);
+}

@@ -55,7 +55,7 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 }
 
 async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share') {
-	fetchFilesButton.disabled = true;
+	share.disabled = true;
 	try {
 		const response = await fetch(endpoint);
 		const folderList = await response.json();
@@ -93,11 +93,11 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share') {
 	} catch (error) {
 		console.error(error);
 	}
-	fetchFilesButton.disabled = false;
+	share.disabled = false;
 }
 
 async function getSecondLevelFolders(endpoint) {
-	fetchFilesButton.disabled = true;
+	share.disabled = true;
 
 	try {
 		const response = await fetch(endpoint);
@@ -139,11 +139,11 @@ async function getSecondLevelFolders(endpoint) {
 	} catch (error) {
 		console.error(error);
 	}
-	fetchFilesButton.disabled = false;
+	share.disabled = false;
 }
 
 async function getFunctionList(endpoint) {
-  fetchFilesButton.disabled = true;
+  share.disabled = true;
 
   try {
     const response = await fetch(endpoint);
@@ -243,11 +243,11 @@ async function getFunctionList(endpoint) {
     console.error(error);
   }
 
-  fetchFilesButton.disabled = false;
+  share.disabled = false;
 }
 
-const fetchFilesButton = document.getElementById('fetch-files-button');
-fetchFilesButton.addEventListener('click', getContent('https://rpss:8443/share'));
+const share = document.getElementById('share');
+share.addEventListener('click', getContent('https://rpss:8443/share'));
 
 
   

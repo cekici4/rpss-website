@@ -24,14 +24,13 @@
 		<div class="container mt-5 mb-5">
 		
 			<h1 class="text-center">File List</h1>
-			<h5 class="text-center">Click on Fetch Files for getting Share content.</h5>
+			<h5 class="text-center"></h5>
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-sm-12">
 					<div class="text-center">
-						<button id="fetch-files-button" class="btn btn-primary">Fetch Files</button>
-					</div>
 					<div id="file-list" class="mt-4 text-center text-lg"></div>
 					<div id="output"></div>
+					</div>
 				</div>
 			</div>
 		</div>
