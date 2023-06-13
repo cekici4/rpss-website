@@ -16,3 +16,5 @@ function setActiveLink() {
 document.addEventListener('DOMContentLoaded', function() {
     setActiveLink();
 });
+
+Response.Write("var Username ='" +System.Web.HttpContext.Current.User.Identity.Name.ToString().ToLower() +"';");
