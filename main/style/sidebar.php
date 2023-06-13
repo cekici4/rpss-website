@@ -1,12 +1,11 @@
-
 <aside>
     <!-- Sidebar Head start -->
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;">
-        <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <div id="mySideNav" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
+        <a href="https://rpss/home.php?page=home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32">
                 <use xlink:href="#bootstrap"></use>
             </svg>
-            <span class="fs-4">RPSS SCOR</span>
+            <span id="sidebar-title" class="fs-4">RPSS SCOR</span>
         </a>
         <!-- Sidebar Head end -->        
         <hr>
@@ -14,13 +13,15 @@
             <!-- Home List Item -->   
             <li class="nav-item" id="home">
                 <a href="https://rpss/home.php?page=home" class=" nav-link text-white" data-page="home">
-                    Home
+                    <span class="material-icons md-48">home</span>
+					Home 
                 </a>
             </li>
             <!-- Share List Item -->
             <li class="nav-item" id="share">
                 <a href="https://rpss/share.php?page=share" class="nav-link text-white" data-page="share">
-                    Share
+                    <span class="material-icons md-48">folder_open</span>
+					Share
                 </a>
             </li>
         </ul>
@@ -48,5 +49,4 @@
         <!-- Dropdown ends -->
     </div>
 </aside>
-
 

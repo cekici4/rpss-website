@@ -37,10 +37,19 @@ a {
   color: #333;
 }
 
-#file-list a:hover {
-  text-decoration: underline;
+#mySideNav {
+	width: 280px; 
+	height: 100vh;
 }
-  
-sidebar a:hover {
-	color: rgb(188, 66, 245);
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+#sidebar-title {
+	font-weight: bold;
 }

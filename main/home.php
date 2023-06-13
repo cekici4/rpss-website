@@ -22,7 +22,7 @@
 
             <!-- Section start -->
             <section>
-                <h1 style="position: relative; left: 20px; top: 50px;">Welcome to the RPSS Webportal!</h1>
+                <h1 class="text-center" style="position: relative; left: 20px; top: 50px;">Welcome to the RPSS Webportal!</h1>
             </section>
             <!-- Section end -->
 
