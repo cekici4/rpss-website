@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+	font-family: 'Poppins', sans-serif;
+}
+
+
 body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
+	
   }
   
   html {
@@ -38,8 +46,12 @@ a {
 }
 
 #mySideNav {
+	position: relative;
 	width: 280px; 
 	height: 100vh;
+	float:left;
+	border: solid 1px black;
+	
 }
 
 .material-symbols-outlined {
@@ -50,6 +62,72 @@ a {
   'opsz' 48
 }
 
+
+
 #sidebar-title {
-	font-weight: bold;
+	font-family: "Nabla";
+	font-palette: --title;
+	font-size:xx-large;
+	margin:0;
 }
+
+@font-palette-values --title {
+	font-family: "Nabla";
+	base-palette: 2;
+	override-colors: 6 rgb(22, 128, 170);
+}
+
+.material-icons {
+	margin-right:10px;
+	
+}
+main {
+	background: rgb(255,255,255);
+	background: linear-gradient(180deg, 
+	rgba(255,255,255,1) 0%, 
+	rgba(22,128,170,1) 100%);
+}
+
+.footerContainer {
+	background-color: #166888;
+	height: 5vh;
+	position:relative;
+	text-decoration:none;
+	
+	
+	
+}
+.footerLogo {
+	height: 20px;
+	width: 95px;
+	margin: 5px;
+	
+}
+.home-text {
+	position: relative;
+}
+
+.sidebar-arrow {
+	positon: relative;
+}
+.sidebar-arrow-button {
+	background: white;
+	float: right;
+}
+.nav-item:hover {
+	background: #84bcd2;
+}
+.nav-item {
+	border-radius: 6px;
+}
+#main-title {
+	width: 100%;
+	text-align:center;
+}
+.home-text {
+	padding-top: 20px;
+	
+	font-weight:750;
+}
+
+	https://scorglobal.sharepoint.com/sites/SCORGroup/SitePages/Help-&-Contacts.aspx

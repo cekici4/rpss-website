@@ -13,35 +13,40 @@
         <!-- Head end -->
 
         <!-- Body start -->
-        <body data-active-page="<?php echo $active_page; ?>">
+        <body>
             <!-- Main start -->
             <main class="d-flex flex-nowrap">
             <!-- Sidebar start -->
             <?php include __DIR__ . '/style/sidebar.php'; ?>    
             <!-- Sidebar end -->
 
-            <!-- Section start -->
-            <section>
-                <h1 class="text-center" style="position: relative; left: 20px; top: 50px;">Welcome to the RPSS Webportal!</h1>
-            </section>
-            <!-- Section end -->
-
-            <!-- Scripts section: includes Bootstrap JS libraries -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-                crossorigin="anonymous"
-                defer></script>
             
-            <!-- Scripts section end -->    
+            
+                <div id="main-title"> 
+				
+					<h1 class="home-text">Run PowerShell Scripts </h1>
+					<p>This Webportal allows for running PowerShell scripts directly from it. please notice that only authorized users are allowed on this portal. 
+					<br>Further please remember that every action is being logged. </p>
+				</div>
+				
+			
+            
+			
+              
             </main>
             <!-- Main end -->
         </body>
         <!-- Body end -->
 
         <!-- Script start -->
-        <script>
-            
-        </script>
+        <script type="text/javascript">
+			function activateLink() {
+				var link = document.getElementById("home");
+				link.classList.add("active");
+			}
+		</script>
         <!-- Script end -->
-</html>
+		<!-- Footer starts -->
+		<?php include __DIR__ . '/style/footer.php'; ?>
+</html><!-- Footer ends --> 
 <!-- End of HTML document -->

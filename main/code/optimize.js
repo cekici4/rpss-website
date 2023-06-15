@@ -1,20 +1,26 @@
-function setActiveLink() {
-    const navLinks = document.querySelectorAll('.nav-item a');
-    const activePage = document.body.getAttribute('data-active-page');
-
-    navLinks.forEach(link => {
-        const linkPage = new URL(link.href).pathname.split('/').pop().split('.')[0];
-        if (linkPage === activePage) {
-            link.parentNode.classList.add('active');
-        } else {
-            link.parentNode.classList.remove('active');
-        }
-    });
-}
-
 // Call the function when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    setActiveLink();
+    activateLink();
 });
+var sideBarPos = 0;
 
-Response.Write("var Username ='" +System.Web.HttpContext.Current.User.Identity.Name.ToString().ToLower() +"';");
+function moveSidebar() {
+	
+	if (sideBarPos == 0){
+		document.getElementById('mySideNav').style.width = "0px";
+		document.getElementById('share').style.display = "none";
+		document.getElementById('home').style.display = "none";
+		document.getElementById('sidebar-title').style.display = "none";
+		
+		sideBarPos = 1;
+	} else {
+		document.getElementById('mySideNav').style.width = "280px";
+		document.getElementById('share').style.display = "block";
+		document.getElementById('home').style.display = "block";
+		document.getElementById('sidebar-title').style.display = "block";
+		sideBarPos = 0;
+	}
+
+
+}
+
