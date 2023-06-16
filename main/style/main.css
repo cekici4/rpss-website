@@ -40,10 +40,7 @@ li {
   cursor: pointer;
 }
 
-a {
-  text-decoration: none;
-  color: #333;
-}
+
 
 #mySideNav {
 	position: relative;
@@ -59,7 +56,8 @@ a {
   'FILL' 0,
   'wght' 400,
   'GRAD' 0,
-  'opsz' 48
+  'opsz' 48;
+  color:white;
 }
 
 
@@ -93,7 +91,7 @@ main {
 	height: 5vh;
 	position:relative;
 	text-decoration:none;
-	
+	display: flex;
 	
 	
 }
@@ -101,6 +99,9 @@ main {
 	height: 20px;
 	width: 95px;
 	margin: 5px;
+	clear: left;
+	float: left;
+	margin-top: 15px;
 	
 }
 .home-text {
@@ -109,9 +110,10 @@ main {
 
 .sidebar-arrow {
 	positon: relative;
+	color:white !important;
 }
 .sidebar-arrow-button {
-	background: white;
+	background: rgb(33,37,41);
 	float: right;
 }
 .nav-item:hover {
@@ -130,4 +132,46 @@ main {
 	font-weight:750;
 }
 
-	https://scorglobal.sharepoint.com/sites/SCORGroup/SitePages/Help-&-Contacts.aspx
+#scorLink, #sspLink, #sharePointLink {
+	text-decoration: none !important;
+	text-align: center;
+	margin-top: 10px;
+	color: white;
+}
+#scorLink {
+	flex: 1;
+}
+
+#sspLink {
+	flex: 2;
+}
+
+#sharePointLink {
+	flex: 3;
+}
+#shareList a:link {
+	text-decoration: none;
+}
+#fileList {
+	height: 20vh;
+	width: 20vh;
+	margin: 0 auto;
+	padding: 70px;
+	text-align: center;
+	padding-top: 300px !important;
+	border: 2px solid black;
+}
+#fileList a:link {
+	text-align: center;
+}
+#shareHeader {
+	position: relative;
+	height: 20vh;
+	width: 100vh;
+	margin: 0 auto;
+}
+
+
+.shareMain {
+	height: 100vh;
+}

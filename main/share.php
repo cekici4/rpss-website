@@ -13,29 +13,29 @@
 	<!-- Head end -->
 
 	<!-- Body start -->
-	<body data-active-page="<?php echo $active_page; ?>">
-
+	<body>
+		<?php include __DIR__ . '/style/sidebar.php'; ?>  
 		<!-- Main start -->
-		<main class="d-flex flex-nowrap">
-			<!-- Sidebar start -->
-			<?php include __DIR__ . '/style/sidebar.php'; ?>  
-			<!-- Sidebar end -->
-
-		<div class="container mt-5 mb-5">
+		<main class="shareMain d-flex flex-nowrap">
+		<div id="shareHeader"> 	
+		<h1> File Share  </h1>
+		<hr>
+		<p> Down below are the folders that are available at the moment. </p>
 		
-			<h1 class="text-center">File List</h1>
-			<h4 class="text-center">These are the available folders</h4>
-			<h5 class="text-center"></h5>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-sm-12">
-					<div class="text-center">
-					<div id="file-list" class="mt-4 text-center text-lg"></div>
-					<div id="output"></div>
-					</div>
-				</div>
+			<div id="fileList" class=" text-lg mt-4">
+		
+	
+						
 			</div>
 		</div>
-	</main>
+			<div id="output">
+						
+						
+					
+					
+				
+			</div>
+		</main>
 
 	<footer>
 	</footer>

@@ -13,7 +13,10 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 		case 1: // folder type
 			datasetType = 'folder';
 		case 2: // file type
+			
 			const ListUL = document.createElement('ul');
+			ListUL.setAttribute('id','shareList');
+			
 			responseJSON.forEach(folder => {
 				const LI = document.createElement('li');
 				const A = document.createElement('a');
@@ -24,7 +27,8 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 				LI.appendChild(A);
 				ListUL.appendChild(LI);
 			});
-			const fileListDiv = document.getElementById('file-list');
+			
+			const fileListDiv = document.getElementById('fileList');
 			fileListDiv.innerHTML = ''; // Clear any existing content
 			fileListDiv.appendChild(ListUL);
 			
@@ -74,7 +78,7 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share') {
 		  folderListUL.appendChild(folderNameLI);
 		});
 
-		const fileListDiv = document.getElementById('file-list');
+		const fileListDiv = document.getElementById('fileList');
 		fileListDiv.innerHTML = ''; // Clear any existing content
 		fileListDiv.appendChild(folderListUL);
 
@@ -117,7 +121,7 @@ async function getSecondLevelFolders(endpoint) {
 		  secondLevelFolderListUL.appendChild(folderNameLI);
 		});
 
-		const fileListDiv = document.getElementById('file-list');
+		const fileListDiv = document.getElementById('fileList');
 		fileListDiv.innerHTML = ''; // Clear any existing content
 		fileListDiv.appendChild(secondLevelFolderListUL);
 
