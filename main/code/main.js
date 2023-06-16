@@ -14,23 +14,21 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 			datasetType = 'folder';
 		case 2: // file type
 			
-			const ListUL = document.createElement('ul');
-			ListUL.setAttribute('id','shareList');
-			
+			const ListDiv = document.createElement('div');
+			ListDiv.setAttribute('id','folderDiv')
 			responseJSON.forEach(folder => {
-				const LI = document.createElement('li');
+				
 				const A = document.createElement('a');
 				A.innerHTML = folder.fileName;
 				A.href ="#";
 				A.dataset.type = folder.fileType;
 				A.dataset.url = folder.fileUrl; // Add this line
-				LI.appendChild(A);
-				ListUL.appendChild(LI);
+				
+				ListDiv.appendChild(A);
 			});
-			
 			const fileListDiv = document.getElementById('fileList');
 			fileListDiv.innerHTML = ''; // Clear any existing content
-			fileListDiv.appendChild(ListUL);
+			fileListDiv.appendChild(ListDiv);
 			
 				console.log('file event created');
 				fileListDiv.addEventListener('click', async (event) => {
@@ -64,7 +62,7 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share') {
 		const response = await fetch(endpoint);
 		const folderList = await response.json();
 		console.log('First level folder list:', folderList);
-		const folderListUL = document.createElement('ul');
+		const folderListDiv = document.createElement('ul');
 
 		folderList.forEach(folder => {
 		  const folderNameLI = document.createElement('li');
@@ -75,12 +73,12 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share') {
 		  folderNameA.href ="#";
 		  folderNameA.dataset.url = folder.folderUrl; // Add this line
 		  folderNameLI.appendChild(folderNameA);
-		  folderListUL.appendChild(folderNameLI);
+		  folderListDiv.appendChild(folderNameLI);
 		});
 
-		const fileListDiv = document.getElementById('fileList');
+		const fileListDiv = document.getElementById('file-list');
 		fileListDiv.innerHTML = ''; // Clear any existing content
-		fileListDiv.appendChild(folderListUL);
+		fileListDiv.appendChild(folderListDiv);
 
 		// Add an event listener to the folder list container to handle clicks on folder links
 		fileListDiv.addEventListener('click', async (event) => {
@@ -107,7 +105,7 @@ async function getSecondLevelFolders(endpoint) {
 		const response = await fetch(endpoint);
 		const secondLevelFolderList = await response.json();
 		console.log('Second level folder list:', secondLevelFolderList);
-		const secondLevelFolderListUL = document.createElement('ul');
+		const secondLevelFolderListDiv = document.createElement('ul');
 
 		secondLevelFolderList.forEach(folder => {
 		  const folderNameLI = document.createElement('li');
@@ -118,12 +116,12 @@ async function getSecondLevelFolders(endpoint) {
 		  folderNameA.dataset.url = folder.folderUrl; // Add this line
 
 		  folderNameLI.appendChild(folderNameA);
-		  secondLevelFolderListUL.appendChild(folderNameLI);
+		  secondLevelFolderListDiv.appendChild(folderNameLI);
 		});
 
-		const fileListDiv = document.getElementById('fileList');
+		const fileListDiv = document.getElementById('file-list');
 		fileListDiv.innerHTML = ''; // Clear any existing content
-		fileListDiv.appendChild(secondLevelFolderListUL);
+		fileListDiv.appendChild(secondLevelFolderListDiv);
 
 		// Add an event listener to the second level folder list container to handle clicks on folder links
 		fileListDiv.addEventListener('click', async (event) => {

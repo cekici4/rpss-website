@@ -153,13 +153,16 @@ main {
 	text-decoration: none;
 }
 #fileList {
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 	height: 20vh;
 	width: 20vh;
-	margin: 0 auto;
 	padding: 70px;
 	text-align: center;
-	padding-top: 300px !important;
-	border: 2px solid black;
+	
+
 }
 #fileList a:link {
 	text-align: center;
