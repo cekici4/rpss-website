@@ -123,12 +123,19 @@ main {
 	border-radius: 6px;
 }
 #main-title {
-	width: 100%;
-	text-align:center;
+	
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100vh;
+	margin: 0 auto;
+	text-align: center;
+	border: 2px solid white;
 }
 .home-text {
+	text-align:center;
 	padding-top: 20px;
-	
 	font-weight:750;
 }
 
@@ -158,14 +165,16 @@ main {
 	flex-wrap: wrap;
 	justify-content: center;
 	height: 20vh;
-	width: 20vh;
+	width: 100vh;
 	padding: 70px;
 	text-align: center;
+	border: 4px solid white;
 	
 
 }
 #fileList a:link {
 	text-align: center;
+	
 }
 #shareHeader {
 	position: relative;
@@ -177,4 +186,34 @@ main {
 
 .shareMain {
 	height: 100vh;
+}
+
+#folderDiv {
+	display: grid; 
+	width: 100vh;
+}
+
+#public {
+	align-self: start;
+}
+
+#private {
+	align-self: end;
+}
+
+p {
+	font-size: 25px;
+}
+
+#folderDiv a:link {
+	text-decoration: none;
+	
+}
+#output {
+	border: 3px solid white;
+	font-size: 20px;
+	color: white;
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	
 }

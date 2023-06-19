@@ -17,27 +17,32 @@
 		<?php include __DIR__ . '/style/sidebar.php'; ?>  
 		<!-- Main start -->
 		<main class="shareMain d-flex flex-nowrap">
+		
 		<div id="shareHeader"> 	
-		<h1> File Share  </h1>
+		
+		<h1> File Share</h1>
 		<hr>
+		
 		<p> Down below are the folders that are available at the moment. </p>
 		
 			<div id="fileList" class=" text-lg mt-4">
-		
+				
 	
 						
 			</div>
-		</div>
 			<div id="output">
 						
 						
 					
 					
 				
-			</div>
+				</div>
+		</div>
+			
 		</main>
 
 	<footer>
+		<?php include __DIR__ . '/style/footer.php'; ?>
 	</footer>
 
 	<!-- Script start -->

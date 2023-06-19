@@ -25,7 +25,8 @@
                 <div id="main-title"> 
 				
 					<h1 class="home-text">Run PowerShell Scripts </h1>
-					<p>This Webportal allows for running PowerShell scripts directly from it. please notice that only authorized users are allowed on this portal. 
+					<hr>
+					<p>This Webportal allows for running PowerShell scripts directly from it. Please notice that only authorized users are allowed on this portal. 
 					<br>Further please remember that every action is being logged. </p>
 				</div>
 				

@@ -8,6 +8,7 @@ function createParameterModal() {
 async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 	const response = await fetch(endpoint);
 	const responseJSON = await response.json();
+	
 	switch(type) {
 		case 0: // default type (folder)		
 		case 1: // folder type
@@ -15,11 +16,13 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 		case 2: // file type
 			
 			const ListDiv = document.createElement('div');
-			ListDiv.setAttribute('id','folderDiv')
+			ListDiv.setAttribute('id','folderDiv');
 			responseJSON.forEach(folder => {
 				
 				const A = document.createElement('a');
-				A.innerHTML = folder.fileName;
+				const fname = folder.fileName;
+				A.setAttribute("id", fname);
+				A.innerHTML = fname;
 				A.href ="#";
 				A.dataset.type = folder.fileType;
 				A.dataset.url = folder.fileUrl; // Add this line
@@ -51,7 +54,6 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 					}
 				});
 
-			
 			break;
 	}
 }
