@@ -154,7 +154,7 @@ async function getFunctionList(endpoint) {
 	console.log(response);
     const functionData = await response.json();
     console.log('Function data:', functionData);
-
+	console.log('Function Syntax:', functionData.syntax);
     // Check if the functionData object contains a functions property that is an array
     if (!functionData.functions || !Array.isArray(functionData.functions)) {
       console.error('Invalid function data:', functionData);
@@ -168,7 +168,7 @@ async function getFunctionList(endpoint) {
       return;
     }
     functionParamsDiv.innerHTML = '';
-
+// select starts
     const functionParamsSelect = document.createElement('select');
     functionParamsSelect.id = 'function-params-select';
 
@@ -189,6 +189,7 @@ async function getFunctionList(endpoint) {
     });
 
     functionParamsDiv.appendChild(functionParamsSelect);
+// select ends
 
     // Add an event listener to the function params select to handle form submission
     functionParamsSelect.addEventListener('change', (event) => {
