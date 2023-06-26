@@ -25,20 +25,19 @@
 		
 		<p> Down below are the folders that are available at the moment. </p>
 		
-			<div id="fileList" class=" text-lg mt-4">
+			<div id="fileList" class=" text-lg mt-4"></div>
+			<div id="function-list"> </div>
+			<div id="output"> </div>	
 				
-	
-						
-			</div>
-			<div id="output">
-						
-						
-				
-				
-					
-				
-				</div>
 		</div>
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<p id="selectedFunctionName"></p>
+					<input id="paramsInput" type="text" placeholder="Enter parameters and values">
+					<button id="runButton">Run</button>
+				</div>
+			</div>
 			
 		</main>
 

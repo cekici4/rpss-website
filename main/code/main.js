@@ -52,6 +52,7 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 					if (target.dataset.type === 'folder') { 
 						await getContent("https://rpss:8443"+target.dataset.url);
 					}
+					
 				});
 
 			break;
@@ -147,112 +148,99 @@ async function getSecondLevelFolders(endpoint) {
 }
 
 async function getFunctionList(endpoint) {
-  share.disabled = true;
+	share.disabled = true;
 
-  try {
-    const response = await fetch(endpoint);
-	console.log(response);
-    const functionData = await response.json();
-    console.log('Function data:', functionData);
-	console.log('Function Syntax:', functionData.syntax);
-    // Check if the functionData object contains a functions property that is an array
-    if (!functionData.functions || !Array.isArray(functionData.functions)) {
-      console.error('Invalid function data:', functionData);
-      return;
-    }
+	try {
+		const response = await fetch(endpoint);
+		console.log(response);
+		const functionData = await response.json();
+		console.log('Function data:', functionData);
+		console.log('Function Syntax:', functionData.syntax);
 
-    // Display the function parameters
-    const functionParamsDiv = document.getElementById('function-params');
-    if (!functionParamsDiv) {
-      console.error('Function params div not found');
-      return;
-    }
-    functionParamsDiv.innerHTML = '';
-// select starts
-    const functionParamsSelect = document.createElement('select');
-    functionParamsSelect.id = 'function-params-select';
+	if (!functionData.functions || !Array.isArray(functionData.functions)) {
+	console.error('Invalid function data:', functionData);
+	return;
+	}
 
-    const functionOptions = [];
-    functionData.functions.forEach(functionName => {
-      const functionOption = {
-        name: functionName,
-        // add more properties as needed
-      };
-      functionOptions.push(functionOption);
-    });
+	const functionListDiv = document.getElementById('function-list');
+	
+	if (!functionListDiv) {
+		console.error('Function list div not found');
+		return;
+	}
+	functionListDiv.innerHTML = '';
 
-    functionOptions.forEach(functionOption => {
-      const optionElement = document.createElement('option');
-      optionElement.value = functionOption.name;
-      optionElement.text = functionOption.name;
-      functionParamsSelect.appendChild(optionElement);
-    });
+	const ulElement = document.createElement('ul');
 
-    functionParamsDiv.appendChild(functionParamsSelect);
-// select ends
+	functionData.functions.forEach(functionName => {
+		const liElement = document.createElement('li');
+		liElement.textContent = functionName;
 
-    // Add an event listener to the function params select to handle form submission
-    functionParamsSelect.addEventListener('change', (event) => {
-      event.preventDefault(); // prevent the default behavior of the form submission
-      const selectedFunctionName = event.target.value;
-      console.log('Selected function:', selectedFunctionName);
+		liElement.addEventListener('click', () => {
+			const modal = document.getElementById('myModal');
+			modal.style.display = "block";
 
-      // Clear any existing form elements from the function params div
-      functionParamsDiv.innerHTML = '';
+			const selectedFunctionNameDisplay = document.getElementById('selectedFunctionName');
+			selectedFunctionNameDisplay.textContent = `Selected function: ${functionName}`;
 
-      // Add the text input field for the function parameters
-      const paramsInput = document.createElement('input');
-      paramsInput.setAttribute('type', 'text');
-      paramsInput.setAttribute('placeholder', 'Enter parameters and values');
-      functionParamsDiv.appendChild(paramsInput);
+			const span = document.getElementsByClassName("close")[0];
+			span.onclick = () => {
+			modal.style.display = "none";
+		};
 
-      // Add the button for submitting the function and parameters
-      const submitButton = document.createElement('button');
-      submitButton.innerText = 'Submit';
-      submitButton.addEventListener('click', () => {
-        // Construct the URL for the API endpoint
-        const url = `https://rpss:8443/share/public/SCORCMD/${selectedFunctionName}`;
+		const runButton = document.getElementById('runButton');
+		runButton.onclick = async () => {
+			const url = `https://rpss:8443/share/public/SCORCMD/${functionName}`;
 
-        // Get the parameters from the input field
-       const paramsString = paramsInput.value.trim();
-		const params = {};
-		if (paramsString) {
-		  const paramPairs = paramsString.split(',');
-		  for (const pair of paramPairs) {
-			const [param, value] = pair.split(':');
-			params[param.trim()] = [value.trim()];
-		  }
-		}
+			const paramsInput = document.getElementById('paramsInput');
+			const paramsString = paramsInput.value.trim();
+			const params = {};
+		
+			if (paramsString) {
+				const paramPairs = paramsString.split(',');
+				for (const pair of paramPairs) {
+					const [param, value] = pair.split(':');
+					params[param.trim()] = [value.trim()];
+				}
+			}
 
-        // Send a POST request to the API endpoint with the selected function and parameters
-        fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            params: params,
-            arguments: []
-          })
-        })
-          .then(response => response.text())
-          .then(output => {
-			  console.log(output);
-			  outputDiv.innerHTML = output;
-			})
-          .catch(error => console.error(error));
-      });
-      functionParamsDiv.appendChild(submitButton);
-    });
-  } catch (error) {
-    console.error(error);
-  }
+			try {
+				const response = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						params: params,
+						arguments: []
+					})
+				});
+	
+				const output = await response.text();
+				console.log(output);
+				outputDiv.innerHTML = output;
+				modal.style.display = "none";
+		
+				} catch (error) {
+					console.error(error);
+				}
+			};
+		});
 
-  share.disabled = false;
+		ulElement.appendChild(liElement);
+	});
+
+functionListDiv.appendChild(ulElement);
+} catch (error) {
+console.error(error);
+}
+
+share.disabled = false;
 }
 
 const share = document.getElementById('share');
 share.addEventListener('click', getContent('https://rpss:8443/share'));
+
 
 
   
