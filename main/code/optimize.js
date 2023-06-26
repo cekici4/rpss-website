@@ -12,6 +12,7 @@ function moveSidebar() {
 		document.getElementById('home').style.display = "none";
 		document.getElementById('sidebar-title').style.display = "none";
 		document.getElementById('sidebar-arrow').textContent="chevron_right";
+		document.getElementById('UserID').style.display = "none";
 		showIcons();
 
 		sideBarPos = 1;
@@ -21,6 +22,7 @@ function moveSidebar() {
 		document.getElementById('home').style.display = "block";
 		document.getElementById('sidebar-title').style.display = "block";
 		document.getElementById('sidebar-arrow').textContent="chevron_left";
+		document.getElementById('UserID').style.display = "block";
 		sideBarPos = 0;
 	}
 function showIcons() {

@@ -25,7 +25,20 @@
                 </a>
             </li>
         </ul>
-        <hr>           
+        <hr> 
+		
+		<div id="UserID">
+			<?php
+				if (isset($_SERVER['LOGON_USER'])) {
+					echo "Logged in as: " . $_SERVER['LOGON_USER'];
+				} else {
+					echo "Not logged in";
+				}
+			?>
+		</div>
+		
+		
+		
 			<button onclick="moveSidebar();" class="sidebar-arrow-button"><span id="sidebar-arrow" class="material-symbols-outlined">chevron_left</span></button>
             <!-- Dropdown Items end -->
         </div>
