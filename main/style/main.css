@@ -505,3 +505,17 @@ button.remove {
         padding: 10px; /* Reduce padding */
     }
 }
+
+  #copy-button {
+			
+            background-color: #4CAF50; /* Green background */
+            border: none; /* Remove borders */
+            color: white; /* White text */
+            padding: 15px 32px; /* Some padding */
+            text-align: center; /* Centered text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make it an inline element */
+            font-size: 16px; /* Set font size */
+            margin: 4px 2px; /* Some margin */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            border-radius: 4px; /* Rounded corners */

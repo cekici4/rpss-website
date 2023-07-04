@@ -50,8 +50,9 @@
 			<div id="function-list"> 
 			
 			</div>
+			
 			<div id="output" style=""> </div>	
-				
+			 <button id="copy-button"><i class="fas fa-clipboard"></i>  Copy</button>
 		</div>
 <div id="myModal" class="modal">
     <div class="modal-content">
@@ -81,6 +82,30 @@
 				var link = document.getElementById("share");
 				link.classList.add("active");
 			}
+	document.getElementById('copy-button').addEventListener('click', function() {
+    // Get the text from the div
+    var textToCopy = document.getElementById('output').innerText;
+    var copyButton = document.getElementById('copy-button'); // Reference to the copy button
+
+    // Use the Clipboard API to copy the text to the clipboard
+    navigator.clipboard.writeText(textToCopy).then(function() {
+        // Successfully copied to clipboard
+        console.log('Text successfully copied to clipboard');
+        
+        // Change the button text to indicate it has been copied
+        copyButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        
+        // Change it back after 1.5 seconds
+        setTimeout(function() {
+            copyButton.innerHTML = '<i class="fas fa-clipboard"></i> Copy';
+        }, 1500);
+
+    }).catch(function(err) {
+        // Failed to copy to clipboard
+        console.error('Error copying text to clipboard', err);
+    });
+});
+
 		</script>
         <!-- Script end -->
 	

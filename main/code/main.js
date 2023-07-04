@@ -7,9 +7,11 @@ function createParameterModal() {
 const functionList= document.getElementById('function-list');
 const outputList= document.getElementById('output');
 var headerText = document.getElementById("function-header");
+const copyDiv = document.getElementById('copy-button');
 headerText.style.display = "none";
 functionList.style.display = "none";
 outputList.style.display = "none";
+copyDiv.style.display = "none";
 
 async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 	const response = await fetch(endpoint);
@@ -317,6 +319,8 @@ async function getFunctionList(endpoint) {
                             // Display the server response inside the div with id 'output'
                             const outputDiv = document.getElementById('output');
 							outputList.style.display = "block";
+							const copyDiv = document.getElementById('copy-button');
+							copyDiv.style.display = "block";
                             outputDiv.innerText = responseData;
                             // Close the modal
                             modal.style.display = "none";
@@ -331,8 +335,14 @@ async function getFunctionList(endpoint) {
                     span.onclick = () => {
                         modal.style.display = "none";
 						outputList.style.display = "none";
+						copyDiv.style.display = "none";
 						
                     };
+					const outputDiv = document.getElementById('output');
+					outputDiv.style.display = "none";
+					
+					copyDiv.style.display = "none";
+					
                 }
             });
 
@@ -344,8 +354,8 @@ async function getFunctionList(endpoint) {
     } catch (error) {
         console.error(error);
     }
+	
 }
-
 
 
 const share = document.getElementById('share');
