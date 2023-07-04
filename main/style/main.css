@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
 	font-family: 'Poppins', sans-serif;
 }
-
+* {
+	font-family: 'Poppins', sans-serif;
+}
+p {
+    font-size: 20px; /* Reduced font size for paragraphs */
+    line-height: 1.5; /* Improved line-height for readability */
+    margin-bottom: 20px; /* Space between paragraphs and other elements */
+}
 
 body {
     min-height: 100vh;
@@ -88,10 +97,13 @@ main {
 
 .footerContainer {
 	background-color: #166888;
-	height: 5vh;
-	position:relative;
+	
+	
 	text-decoration:none;
 	display: flex;
+    align-items: center; /* Vertically align items */
+    background-color: #166888;
+    padding: 10px 20px; /* Padding around the container */
 	
 	
 }
@@ -102,7 +114,20 @@ main {
 	clear: left;
 	float: left;
 	margin-top: 15px;
+	margin-right: 20px; /* Margin to the right of the logo */
 	
+}
+
+.footerLinks {
+    display: flex;
+    justify-content: space-between; /* Distribute the links evenly */
+    flex-grow: 1; /* Take up remaining space */
+}
+.footerLink {
+    text-decoration: none;
+    color: #ffffff; /* Set the text color */
+    margin: 0 10px; /* Equal margin on the left and right */
+    text-align: center;
 }
 .home-text {
 	position: relative;
@@ -169,18 +194,19 @@ main {
 	padding: 70px;
 	text-align: center;
 	border: 4px solid white;
-	
+	margin-bottom: 20px; /* Add margin below fileList */	
 
 }
-#fileList a:link {
-	text-align: center;
-	
+#fileList a {
+    margin-right: 15px; /* Add margin to the right of each link */
+    margin-bottom: 15px; /* Add margin below each link */
 }
 #shareHeader {
 	position: relative;
 	height: 20vh;
 	width: 100vh;
 	margin: 0 auto;
+	padding: 20px;
 }
 
 
@@ -188,10 +214,6 @@ main {
 	height: 100vh;
 }
 
-#folderDiv {
-	display: grid; 
-	width: 100vh;
-}
 
 #public {
 	align-self: start;
@@ -205,19 +227,67 @@ p {
 	font-size: 25px;
 }
 
-#folderDiv a:link {
-	text-decoration: none;
-	
-}
-#output {
-	border: 3px solid white;
-	font-size: 20px;
-	color: white;
-	font-family: 'Poppins', sans-serif;
-	text-align: center;
-	
+body, html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
+#mySideNav {
+	background-color: #2C3E50; /* Dark background for the sidebar */
+	width: 280px; 
+	height: 100vh;
+	border-right: solid 1px #34495E; /* Slightly lighter border color */
+	overflow: auto; /* In case the content exceeds the viewport height */
+}
+
+#sidebar-title {
+	font-size: 1.8em; /* Adjust title size */
+	margin: 20px 0; /* Add some margin around the title */
+	color: #ecf0f1; /* Light color for the title text */
+	text-align: center; /* Center the text */
+}
+
+#sidebar-nav .nav-item {
+	margin: 10px 0;
+}
+
+#sidebar-nav .nav-item a {
+	display: flex; /* Make the link a flex container */
+	align-items: center; /* Center items vertically */
+	padding: 15px; /* Padding around each item */
+}
+
+#sidebar-nav .nav-item:hover {
+	background-color: #34495E; /* Slightly lighter background on hover */
+}
+
+.material-icons {
+	font-size: 24px; /* Adjust icon size */
+	margin-right: 15px; /* Add some margin to the right of the icon */
+}
+
+#UserID {
+	margin: 20px 0;
+	padding: 15px;
+	color: #bdc3c7; /* Light gray color for text */
+	font-size: 14px; /* Slightly smaller text size */
+	text-align: center; /* Center text */
+}
+
+.sidebar-arrow-button {
+	background-color: 0d6efd; /* Make the button match the hover effect of list items */
+	border: none; /* Remove the border */
+	color: #ecf0f1; /* Make the arrow color light */
+	font-size: 20px; /* Adjust the arrow size */
+	padding: 10px; /* Padding around the arrow */
+	width: 100%; /* Make the button fill the width */
+	cursor: pointer; /* Change cursor to pointer */
+}
+
+.sidebar-arrow-button:hover {
+	background-color: #2C3E50; /* Slightly darker background on hover */
+}
 
 .function-list-container {
 display: flex;
@@ -302,7 +372,8 @@ margin: 10px;
 #function-list li {
     padding: 10px;
     cursor: pointer;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
+	font-weight:bold;
 }
 
 #function-list li:hover {
@@ -354,6 +425,83 @@ button.remove {
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%); /* Ensure it is centered */
-    width: 20px; /* Setting a fixed size */
-    height: 20px; /* Setting a fixed size */
+    width: 10px; /* Setting a fixed size */
+    height: 10px; /* Setting a fixed size */
+}
+#runButton {
+	background-color: rgb(28, 131, 172);
+}
+
+#fileList a {
+  font-weight: 600; /* makes the text thicker */
+  color: #333; /* sets the text color */
+  text-decoration: none; /* removes the underline */
+  border-bottom: 2px solid #4caf50; /* adds a bottom border */
+  padding: 5px 8px; /* adds some padding */
+  display: inline-block; /* necessary for padding to take effect */
+ 
+  transition: all 0.3s ease; /* makes color changes smooth */
+  margin-right: 15px; /* Add margin to the right of each link */
+    margin-bottom: 15px; /* Add margin below each link */
+}
+
+#fileList a:hover {
+  color: #4caf50; /* changes text color on hover */
+  border-bottom-color: #333; /* changes border color on hover */
+}
+#folderDiv a {
+  font-weight: 700; /* makes the text even thicker than fileList */
+  color: #2a2a2a; /* sets the text color slightly darker */
+  text-decoration: none; /* removes the underline */
+  border-bottom: 3px solid #2196f3; /* adds a bottom border with a different color */
+  padding: 6px 10px; /* adds some padding */
+  display: inline-block; /* necessary for padding to take effect */
+  margin-right: 12px; /* spaces the links apart */
+  transition: all 0.3s ease; /* makes color changes smooth */
+}
+
+#folderDiv a:hover {
+  color: #2196f3; /* changes text color on hover */
+  border-bottom-color: #2a2a2a; /* changes border color on hover */
+}
+#function-header h3 {
+	
+    font-size: 20px; /* Set font size of the heading */
+    margin-bottom: 15px; /* Add space below the heading */
+    color: #333; /* Set text color */
+	font-family: Poppins, sans-serif;
+}
+/* For tablets and small laptops */
+@media screen and (max-width: 1024px) {
+    #main-title, #fileList {
+        width: 80vw; /* Use viewport width units instead of fixed values */
+    }
+    p {
+        font-size: 18px; /* Reduce the font size */
+    }
+    #function-list {
+        max-width: 350px; /* Reduce the max-width */
+        padding: 15px; /* Reduce the padding */
+    }
+    .footerLogo {
+        height: 15px; /* Reduce logo size */
+        width: 70px; /* Reduce logo width */
+    }
+}
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+    #main-title, #fileList {
+        width: 90vw; /* Increase width to use more space available on mobile */
+    }
+    p {
+        font-size: 16px; /* Further reduce font size */
+    }
+    #sidebar-title {
+        font-size: x-large; /* Reduce font size of sidebar title */
+    }
+    #function-list {
+        max-width: 100%; /* Allow function list to expand fully */
+        padding: 10px; /* Reduce padding */
+    }
 }

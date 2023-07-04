@@ -4,6 +4,12 @@ function createParameterModal() {
 	myModal.toggle();
 	console.log('run');
 }
+const functionList= document.getElementById('function-list');
+const outputList= document.getElementById('output');
+var headerText = document.getElementById("function-header");
+headerText.style.display = "none";
+functionList.style.display = "none";
+outputList.style.display = "none";
 
 async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 	const response = await fetch(endpoint);
@@ -30,6 +36,8 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 				ListDiv.appendChild(A);
 			});
 			const fileListDiv = document.getElementById('fileList');
+			
+			
 			fileListDiv.innerHTML = ''; // Clear any existing content
 			fileListDiv.appendChild(ListDiv);
 			
@@ -43,6 +51,8 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 						const funcPara = document.createElement('div');//
 						funcPara.id = "function-params";
 						fileListDiv.appendChild(funcPara);
+						
+			headerText.style.display = "block";
 						await getFunctionList("https://rpss:8443"+target.dataset.url+ "/" +target.innerHTML);
 					}
 				});
@@ -109,7 +119,7 @@ async function getSecondLevelFolders(endpoint) {
 		const secondLevelFolderList = await response.json();
 		console.log('Second level folder list:', secondLevelFolderList);
 		const secondLevelFolderListDiv = document.createElement('ul');
-
+		
 		secondLevelFolderList.forEach(folder => {
 		  const folderNameLI = document.createElement('li');
 		  const folderNameA = document.createElement('a');
@@ -134,7 +144,7 @@ async function getSecondLevelFolders(endpoint) {
 			console.log('Clicked second level folder link:', target.href);
 			// Call the getFunctionList() function when a second level folder link is clicked
 			const folderEndpoint = target.dataset.url; // Use dataset.url instead of
-
+			
 
 			console.log('Second level folder endpoint:', folderEndpoint);
 			await getFunctionList(folderEndpoint);
@@ -161,6 +171,7 @@ async function getFunctionList(endpoint) {
         }
 
         const functionListDiv = document.getElementById('function-list');
+		functionList.style.display = "block";
         functionListDiv.innerHTML = '';
 
         const ulElement = document.createElement('ul');
@@ -305,6 +316,7 @@ async function getFunctionList(endpoint) {
 
                             // Display the server response inside the div with id 'output'
                             const outputDiv = document.getElementById('output');
+							outputList.style.display = "block";
                             outputDiv.innerText = responseData;
                             // Close the modal
                             modal.style.display = "none";
@@ -318,6 +330,8 @@ async function getFunctionList(endpoint) {
                     const span = document.getElementsByClassName("close")[0];
                     span.onclick = () => {
                         modal.style.display = "none";
+						outputList.style.display = "none";
+						
                     };
                 }
             });
