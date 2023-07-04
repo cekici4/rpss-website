@@ -148,95 +148,191 @@ async function getSecondLevelFolders(endpoint) {
 }
 
 async function getFunctionList(endpoint) {
-	share.disabled = true;
+    const share = document.getElementById('share');
+    share.disabled = true;
 
-	try {
-		const response = await fetch(endpoint);
-		console.log(response);
-		const functionData = await response.json();
-		console.log('Function data:', functionData);
-		console.log('Function Syntax:', functionData.syntax);
+    try {
+        const response = await fetch(endpoint);
+        const functionData = await response.json();
 
-	if (!functionData.functions || !Array.isArray(functionData.functions)) {
-	console.error('Invalid function data:', functionData);
-	return;
-	}
+        if (!functionData.functions || !Array.isArray(functionData.functions)) {
+            console.error('Invalid function data:', functionData);
+            return;
+        }
 
-	const functionListDiv = document.getElementById('function-list');
-	
-	if (!functionListDiv) {
-		console.error('Function list div not found');
-		return;
-	}
-	functionListDiv.innerHTML = '';
+        const functionListDiv = document.getElementById('function-list');
+        functionListDiv.innerHTML = '';
 
-	const ulElement = document.createElement('ul');
+        const ulElement = document.createElement('ul');
 
-	functionData.functions.forEach(functionName => {
-		const liElement = document.createElement('li');
-		liElement.textContent = functionName;
+        functionData.functions.forEach(functionName => {
+            const liElement = document.createElement('li');
+            liElement.textContent = functionName;
 
-		liElement.addEventListener('click', () => {
-			const modal = document.getElementById('myModal');
-			modal.style.display = "block";
+            liElement.addEventListener('click', async () => {
+                const modal = document.getElementById('myModal');
+                modal.style.display = "block";
 
-			const selectedFunctionNameDisplay = document.getElementById('selectedFunctionName');
-			selectedFunctionNameDisplay.textContent = `Selected function: ${functionName}`;
+                const selectedFunctionNameDisplay = document.getElementById('selectedFunctionName');
+                selectedFunctionNameDisplay.textContent = `Selected function: ${functionName}`;
 
-			const span = document.getElementsByClassName("close")[0];
-			span.onclick = () => {
-			modal.style.display = "none";
-		};
+                const functionSyntaxDisplay = document.getElementById('functionSyntax');
+                const syntaxResponse = await fetch(`${endpoint}/${functionName}`);
+                const syntaxData = await syntaxResponse.json();
 
-		const runButton = document.getElementById('runButton');
-		runButton.onclick = async () => {
-			const url = `https://rpss:8443/share/public/SCORCMD/${functionName}`;
+                let parsedSyntax = null;
+                try {
+                    parsedSyntax = JSON.parse(syntaxData.syntax);
+                } catch {
+                    parsedSyntax = syntaxData.syntax;
+                }
+                functionSyntaxDisplay.textContent = `Syntax: ${parsedSyntax}`;
 
-			const paramsInput = document.getElementById('paramsInput');
-			const paramsString = paramsInput.value.trim();
-			const params = {};
-		
-			if (paramsString) {
-				const paramPairs = paramsString.split(',');
-				for (const pair of paramPairs) {
-					const [param, value] = pair.split(':');
-					params[param.trim()] = [value.trim()];
-				}
-			}
+                if (syntaxData && syntaxData.length > 0 && syntaxData[0].parameters) {
+                    const functionParametersDisplay = document.getElementById('functionParameters');
+                    functionParametersDisplay.innerHTML = '';
 
-			try {
-				const response = await fetch(url, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						params: params,
-						arguments: []
-					})
-				});
-	
-				const output = await response.text();
-				console.log(output);
-				outputDiv.innerHTML = output;
-				modal.style.display = "none";
-		
-				} catch (error) {
-					console.error(error);
-				}
-			};
-		});
+                    const requiredParametersDiv = document.createElement('div');
+                    const optionalParametersDiv = document.createElement('div');
+                    const activeOptionalParametersDiv = document.createElement('div');
+                    const optionalParametersList = document.createElement('ul');
 
-		ulElement.appendChild(liElement);
-	});
+                    // Initially hide optional parameters list
+                    optionalParametersList.style.display = "none";
 
-functionListDiv.appendChild(ulElement);
-} catch (error) {
-console.error(error);
+                    activeOptionalParametersDiv.innerHTML = '<h4>Active Optional Parameters:</h4>';
+                    requiredParametersDiv.innerHTML = '<h4>Required Parameters:</h4>';
+                    optionalParametersDiv.innerHTML = '<h4>Optional Parameters:</h4>';
+
+                    // Create a button to toggle display of optional parameters
+                    const toggleOptionalButton = document.createElement('button');
+                    toggleOptionalButton.textContent = "Toggle Optional Parameters";
+
+                    // Toggle the display when the button is clicked
+                    toggleOptionalButton.addEventListener('click', () => {
+                        if (optionalParametersList.style.display === "none") {
+                            optionalParametersList.style.display = "block";
+                        } else {
+                            optionalParametersList.style.display = "none";
+                        }
+                    });
+
+                    syntaxData[0].parameters.forEach(paramString => {
+                        const [paramName, paramType] = paramString.split(' ');
+
+                        const paramDiv = document.createElement('div');
+                        paramDiv.setAttribute('data-param-name', paramName);
+
+                        const paramLabel = document.createElement('label');
+                        const paramInput = document.createElement('input');
+
+                        paramLabel.textContent = `${paramName}:`;
+                        paramInput.setAttribute('name', paramName);
+                        paramInput.setAttribute('placeholder', paramType);
+
+                        paramDiv.appendChild(paramLabel);
+                        paramDiv.appendChild(paramInput);
+
+                        if (paramString.includes("(String)")) {
+                            requiredParametersDiv.appendChild(paramDiv);
+                        } else {
+                            const addButton = document.createElement('button');
+                            addButton.textContent = '+';
+                            addButton.addEventListener('click', () => {
+                                activeOptionalParametersDiv.appendChild(paramDiv);
+                                paramDiv.removeChild(addButton);
+
+                                const removeButton = document.createElement('button');
+                                removeButton.textContent = '-';
+                                removeButton.addEventListener('click', () => {
+                                    optionalParametersList.appendChild(paramDiv);
+                                    paramDiv.removeChild(removeButton);
+                                    paramDiv.appendChild(addButton);
+                                });
+                                paramDiv.appendChild(removeButton);
+                            });
+                            paramDiv.appendChild(addButton);
+                            optionalParametersList.appendChild(paramDiv);
+                        }
+                    });
+
+                    optionalParametersDiv.appendChild(toggleOptionalButton);
+                    optionalParametersDiv.appendChild(optionalParametersList);
+                    functionParametersDisplay.appendChild(requiredParametersDiv);
+                    functionParametersDisplay.appendChild(activeOptionalParametersDiv);
+                    functionParametersDisplay.appendChild(optionalParametersDiv);
+
+                    // Implementation of the Run button
+                    const runButton = document.getElementById('runButton');
+                    runButton.onclick = async () => {
+                        const loadingIndicator = document.getElementById('loadingIndicator');
+                        loadingIndicator.style.display = 'block';
+
+                        const requiredParameters = Array.from(requiredParametersDiv.getElementsByTagName('input'));
+                        const activeOptionalParameters = Array.from(activeOptionalParametersDiv.getElementsByTagName('input'));
+
+                        const params = {};
+
+                        // Add required parameters to the parameters object
+                        requiredParameters.forEach(input => {
+                            params[input.name] = [input.value];
+                        });
+
+                        // Add active optional parameters to the parameters object
+                        activeOptionalParameters.forEach(input => {
+                            params[input.name] = [input.value];
+                        });
+
+                        // POST request code here...
+                        const apiUrl = `${endpoint}/${functionName}`; // Modify if needed
+                        const requestBody = {
+                            params: params,
+                            functionArguments: [] // Add your function arguments here
+                        };
+
+                        try {
+                            const response = await fetch(apiUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(requestBody)
+                            });
+                            loadingIndicator.style.display = 'none';
+
+                            const responseData = await response.text();
+                            console.log('Server Response:', responseData);
+
+                            // Display the server response inside the div with id 'output'
+                            const outputDiv = document.getElementById('output');
+                            outputDiv.innerText = responseData;
+                            // Close the modal
+                            modal.style.display = "none";
+
+                        } catch (error) {
+                            console.error('Error sending request to the server:', error);
+                        }
+                    };
+
+                    // Implementation of the Close button
+                    const span = document.getElementsByClassName("close")[0];
+                    span.onclick = () => {
+                        modal.style.display = "none";
+                    };
+                }
+            });
+
+            ulElement.appendChild(liElement);
+        });
+
+        functionListDiv.appendChild(ulElement);
+
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-share.disabled = false;
-}
+
 
 const share = document.getElementById('share');
 share.addEventListener('click', getContent('https://rpss:8443/share'));

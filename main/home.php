@@ -19,8 +19,8 @@
             <!-- Sidebar start -->
             <?php include __DIR__ . '/style/sidebar.php'; ?>    
             <!-- Sidebar end -->
-
             
+
             
                 <div id="main-title"> 
 				

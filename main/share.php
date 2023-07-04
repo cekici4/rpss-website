@@ -30,14 +30,21 @@
 			<div id="output"> </div>	
 				
 		</div>
-			<div id="myModal" class="modal">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<p id="selectedFunctionName"></p>
-					<input id="paramsInput" type="text" placeholder="Enter parameters and values">
-					<button id="runButton">Run</button>
-				</div>
-			</div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="selectedFunctionName"></h2>
+        <div id="functionSyntax"></div>
+        <div id="functionParameters"></div>
+        <button id="runButton">Run</button>
+		<div id="loadingIndicator" style="display: none;">
+    <img src="./style/images/spinner.gif" alt="Loading..." />
+</div>
+    </div>
+</div>
+
+
+
 			
 		</main>
 

@@ -35,6 +35,7 @@
 					echo "Not logged in";
 				}
 			?>
+			
 		</div>
 		
 		
