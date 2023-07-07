@@ -42,7 +42,7 @@
 		<hr>
 		
 		<p> Down below are the folders that are available at the moment. </p>
-		
+		<div id="breadcrumb"></div>
 			<div id="fileList" class=" text-lg mt-4"></div>
 			<div id="function-header">
 				<h3>The functions that are available inside this module are listed below.</h3>
@@ -53,16 +53,18 @@
 			
 			<div id="output" style=""> </div>	
 			 <button id="copy-button"><i class="fas fa-clipboard"></i>  Copy</button>
+			<button id="goBackButton" onclick="goBack()">Go Back</button>
+
 		</div>
 <div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 id="selectedFunctionName"></h2>
-        <div id="functionSyntax"></div>
-        <div id="functionParameters"></div>
-        <button id="runButton">Run</button>
+	<div class="modal-content">
+		<span class="close">&times;</span>
+		<h2 id="selectedFunctionName"></h2>
+		<div id="functionSyntax"></div>
+		<div id="functionParameters"></div>
+		<button id="runButton">Run</button>
 		<div id="loadingIndicator" style="display: none;">
-    <img src="./style/images/spinner.gif" alt="Loading..." />
+	<img src="./style/images/spinner.gif" alt="Loading..." />
 </div>
     </div>
 </div>
@@ -105,6 +107,7 @@
         console.error('Error copying text to clipboard', err);
     });
 });
+
 
 		</script>
         <!-- Script end -->

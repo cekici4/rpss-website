@@ -1,8 +1,16 @@
 const outputDiv = document.getElementById('output');
+const navigationHistory = []; 
+const breadcrumbTrail = [];
+
 function createParameterModal() {
 	const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
 	myModal.toggle();
 	console.log('run');
+}
+// New: Function to render the breadcrumb trail on the page
+function renderBreadcrumbTrail() {
+    const breadcrumbDiv = document.getElementById('breadcrumb');
+    breadcrumbDiv.innerHTML = breadcrumbTrail.join(' > ');
 }
 const functionList= document.getElementById('function-list');
 const outputList= document.getElementById('output');
@@ -13,7 +21,9 @@ functionList.style.display = "none";
 outputList.style.display = "none";
 copyDiv.style.display = "none";
 
-async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
+async function getContent(endpoint = 'https://rpss:8443/share', type = 0, itemName="root") {
+	  navigationHistory.push(endpoint); // New: Push endpoint to navigation history
+    
 	const response = await fetch(endpoint);
 	const responseJSON = await response.json();
 	
@@ -58,106 +68,126 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0) {
 						await getFunctionList("https://rpss:8443"+target.dataset.url+ "/" +target.innerHTML);
 					}
 				});
-				fileListDiv.addEventListener('click', async (event) => {
-					event.preventDefault(); 
-					const target = event.target;
-					if (target.dataset.type === 'folder') { 
-						await getContent("https://rpss:8443"+target.dataset.url);
-					}
-					
-				});
+				 fileListDiv.addEventListener('click', async (event) => {
+				event.preventDefault();
+				const target = event.target;
+				if (target.dataset.type === 'folder') {
+					const folderName = target.textContent;
+					if (!breadcrumbTrail.includes(folderName)) {
+						breadcrumbTrail.push(folderName);
+                renderBreadcrumbTrail(); // Render the updated breadcrumb trail
+            }
+            await getContent("https://rpss:8443" + target.dataset.url);
+        }
+    });
 
 			break;
 	}
 }
+async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share', itemName="firstLevel") {
+    navigationHistory.push(endpoint); // New: Push endpoint to navigation history
+    
+    share.disabled = true;
+    try {
+        const response = await fetch(endpoint);
+        const folderList = await response.json();
+        console.log('First level folder list:', folderList);
+        const folderListDiv = document.createElement('ul');
 
-async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share') {
-	share.disabled = true;
-	try {
-		const response = await fetch(endpoint);
-		const folderList = await response.json();
-		console.log('First level folder list:', folderList);
-		const folderListDiv = document.createElement('ul');
+        folderList.forEach(folder => {
+            const folderNameLI = document.createElement('li');
+            const folderNameA = document.createElement('a');
+            console.log(folder);
 
-		folderList.forEach(folder => {
-		  const folderNameLI = document.createElement('li');
-		  const folderNameA = document.createElement('a');
-		  console.log(folder);
+            folderNameA.innerHTML = folder.fileName;
+            folderNameA.href ="#";
+            folderNameA.dataset.url = folder.folderUrl; // Add this line
+            folderNameLI.appendChild(folderNameA);
+            folderListDiv.appendChild(folderNameLI);
+        });
 
-		  folderNameA.innerHTML = folder.fileName;
-		  folderNameA.href ="#";
-		  folderNameA.dataset.url = folder.folderUrl; // Add this line
-		  folderNameLI.appendChild(folderNameA);
-		  folderListDiv.appendChild(folderNameLI);
-		});
+        const fileListDiv = document.getElementById('file-list');
+        fileListDiv.innerHTML = ''; // Clear any existing content
+        fileListDiv.appendChild(folderListDiv);
 
-		const fileListDiv = document.getElementById('file-list');
-		fileListDiv.innerHTML = ''; // Clear any existing content
-		fileListDiv.appendChild(folderListDiv);
+        // Add an event listener to the folder list container to handle clicks on folder links
+        fileListDiv.addEventListener('click', async (event) => {
+            event.preventDefault(); // prevent the default behavior of the link
+            const target = event.target;
+            if (target.tagName === 'A') { // check if the clicked element is a link
+                console.log('Clicked first level folder link:', target.href);
+                
+                const folderName = target.textContent;
+                if (!breadcrumbTrail.includes(folderName)) {
+                    breadcrumbTrail.push(folderName); // Update breadcrumb
+                    renderBreadcrumbTrail(); // Render the updated breadcrumb trail
+                }
+                
+                // Call the getSecondLevelFolders() function when a first level folder link is clicked
+               const folderEndpoint = target.dataset.url ? `https://rpss:8443${target.dataset.url}` : target.href;
 
-		// Add an event listener to the folder list container to handle clicks on folder links
-		fileListDiv.addEventListener('click', async (event) => {
-		  event.preventDefault(); // prevent the default behavior of the link
-		  const target = event.target;
-		  if (target.tagName === 'A') { // check if the clicked element is a link
-			console.log('Clicked first level folder link:', target.href);
-			// Call the getSecondLevelFolders() function when a first level folder link is clicked
-			const folderEndpoint = target.href;
-			console.log('First level folder endpoint:', folderEndpoint);
-			await getSecondLevelFolders(folderEndpoint);
-		  }
-		});
-	} catch (error) {
-		console.error(error);
-	}
-	share.disabled = false;
+                console.log('First level folder endpoint:', folderEndpoint);
+				updateBreadcrumbs(navigationHistory);
+                await getSecondLevelFolders(folderEndpoint);
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
+    share.disabled = false;
 }
+
 
 async function getSecondLevelFolders(endpoint) {
-	share.disabled = true;
+    navigationHistory.push(endpoint); // New: Push endpoint to navigation history
+   
+    share.disabled = true;
 
-	try {
-		const response = await fetch(endpoint);
-		const secondLevelFolderList = await response.json();
-		console.log('Second level folder list:', secondLevelFolderList);
-		const secondLevelFolderListDiv = document.createElement('ul');
-		
-		secondLevelFolderList.forEach(folder => {
-		  const folderNameLI = document.createElement('li');
-		  const folderNameA = document.createElement('a');
+    try {
+        const response = await fetch(endpoint);
+        const secondLevelFolderList = await response.json();
+        console.log('Second level folder list:', secondLevelFolderList);
+        const secondLevelFolderListDiv = document.createElement('ul');
+        
+        secondLevelFolderList.forEach(folder => {
+            const folderNameLI = document.createElement('li');
+            const folderNameA = document.createElement('a');
 
-		  folderNameA.textContent = folder.folderName;
-		  folderNameA.href = "#";
-		  folderNameA.dataset.url = folder.folderUrl; // Add this line
+            folderNameA.textContent = folder.folderName;
+            folderNameA.href = "#";
+            folderNameA.dataset.url = folder.folderUrl; // Add this line
 
-		  folderNameLI.appendChild(folderNameA);
-		  secondLevelFolderListDiv.appendChild(folderNameLI);
-		});
+            folderNameLI.appendChild(folderNameA);
+            secondLevelFolderListDiv.appendChild(folderNameLI);
+        });
 
-		const fileListDiv = document.getElementById('file-list');
-		fileListDiv.innerHTML = ''; // Clear any existing content
-		fileListDiv.appendChild(secondLevelFolderListDiv);
+        const fileListDiv = document.getElementById('file-list');
+        fileListDiv.innerHTML = ''; // Clear any existing content
+        fileListDiv.appendChild(secondLevelFolderListDiv);
 
-		// Add an event listener to the second level folder list container to handle clicks on folder links
-		fileListDiv.addEventListener('click', async (event) => {
-		  event.preventDefault(); // prevent the default behavior of the link
-		  const target = event.target;
-		  if (target.tagName === 'A') { // check if the clicked element is a link
-			console.log('Clicked second level folder link:', target.href);
-			// Call the getFunctionList() function when a second level folder link is clicked
-			const folderEndpoint = target.dataset.url; // Use dataset.url instead of
-			
+        // Add an event listener to the second level folder list container to handle clicks on folder links
+        fileListDiv.addEventListener('click', async (event) => {
+            event.preventDefault(); // prevent the default behavior of the link
+            const target = event.target;
+            if (target.tagName === 'A') { // check if the clicked element is a link
+                console.log('Clicked second level folder link:', target.href);
 
-			console.log('Second level folder endpoint:', folderEndpoint);
-			await getFunctionList(folderEndpoint);
-		  }
-		});
+                // Modify this line to correctly build the folderEndpoint URL
+                const folderEndpoint = target.dataset.url ? `https://rpss:8443${target.dataset.url}` : target.href;
+                
+                console.log('Second level folder endpoint:', folderEndpoint);
+				
+                await getFunctionList(folderEndpoint);
+            }
+			updateBreadcrumbs(navigationHistory);
+        });
 
-	} catch (error) {
-		console.error(error);
-	}
-	share.disabled = false;
+    } catch (error) {
+        console.error(error);
+    }
+    share.disabled = false;
 }
+
 
 async function getFunctionList(endpoint) {
     const share = document.getElementById('share');
@@ -356,6 +386,41 @@ async function getFunctionList(endpoint) {
     }
 	
 }
+
+// New: Function to handle the back button click
+function updateBreadcrumbs(navigationHistory) {
+    const breadcrumbsDiv = document.getElementById('breadcrumbs');
+    breadcrumbsDiv.innerHTML = ''; // Clear existing breadcrumbs
+
+    navigationHistory.forEach((url, index) => {
+        const crumb = document.createElement('a');
+        crumb.href = "#";
+        crumb.textContent = `Folder ${index + 1}`;
+        crumb.dataset.url = url;
+        
+        // Add click event to breadcrumb
+        crumb.addEventListener('click', async (event) => {
+            event.preventDefault();
+            // Navigate to the folder by calling the appropriate function with the url
+            // For example:
+            if (index === 0) { // if it's the first breadcrumb
+                await getFirstLevelFolders(url);
+            } else {
+                await getSecondLevelFolders(url);
+            }
+        });
+
+        breadcrumbsDiv.appendChild(crumb);
+
+        // Optionally add a separator (except after the last crumb)
+        if (index < navigationHistory.length - 1) {
+            const separator = document.createTextNode(' > ');
+            breadcrumbsDiv.appendChild(separator);
+        }
+    });
+}
+
+
 
 
 const share = document.getElementById('share');

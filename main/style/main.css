@@ -28,8 +28,8 @@ body {
     height: 100vh;
     height: -webkit-fill-available;
     max-height: 100vh;
-    overflow-x: auto;
-    overflow-y: hidden;
+    
+    
   }
   
  .dropdown-toggle { outline: 0; }
@@ -212,6 +212,10 @@ main {
 
 .shareMain {
 	height: 100vh;
+	-ms-overflow-style: none;  /* IE and Edge */
+    overflow-y: scroll; /* or "auto" if you want it to only show when necessary */
+
+
 }
 
 
@@ -519,3 +523,4 @@ button.remove {
             margin: 4px 2px; /* Some margin */
             cursor: pointer; /* Add a pointer cursor on hover */
             border-radius: 4px; /* Rounded corners */
+  }
