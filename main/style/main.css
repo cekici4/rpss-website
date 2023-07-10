@@ -1,65 +1,111 @@
+/* Imports */
 @import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-* {
-	font-family: 'Poppins', sans-serif;
-}
-* {
-	font-family: 'Poppins', sans-serif;
-}
-p {
-    font-size: 20px; /* Reduced font size for paragraphs */
-    line-height: 1.5; /* Improved line-height for readability */
-    margin-bottom: 20px; /* Space between paragraphs and other elements */
+/* Variables */
+:root {
+    --font-poppins: 'Poppins', sans-serif;
+    --font-nabla: 'Nabla', sans-serif;
+    --color-white: rgb(255,255,255);
+    --color-blue: rgba(22,128,170,1);
+    --color-dark-blue: #2C3E50;
+    --color-light-blue: #34495E;
+    --color-off-white: #ecf0f1;
+    --color-green: #4CAF50;
+    --color-red: #f44336;
+    --color-black: #333;
+    --color-light-grey: #f5f5f5;
+    --color-grey: #ccc;
+    --color-dark-grey: #2a2a2a;
 }
 
+/* Base Styles */
+* {
+	font-family: var(--font-poppins);
+}
+body, html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
 body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
-	
-  }
-  
-  html {
+}
+html {
     height: -webkit-fill-available;
-  }
-  
-  main {
+}
+p {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Main Styles */
+main {
     height: 100vh;
     height: -webkit-fill-available;
     max-height: 100vh;
-    
-    
-  }
-  
- .dropdown-toggle { outline: 0; }
-  
- .text-lg {
-  font-size: 18px;
+    background: var(--color-white);
+    background: linear-gradient(180deg, 
+	var(--color-white) 0%, 
+	var(--color-blue) 100%);
 }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-  cursor: pointer;
-}
-
-
-
+/* Sidebar Styles */
 #mySideNav {
 	position: relative;
 	width: 280px; 
 	height: 100vh;
 	float:left;
 	border: solid 1px black;
-	
+    background-color: var(--color-dark-blue);
+	border-right: solid 1px var(--color-light-blue);
+	overflow: auto;
+}
+#sidebar-title {
+	font-family: var(--font-nabla);
+	font-size: 1.8em;
+	margin: 20px 0;
+	color: var(--color-off-white);
+	text-align: center;
+}
+#sidebar-nav .nav-item {
+	margin: 10px 0;
+}
+#sidebar-nav .nav-item a {
+	display: flex;
+	align-items: center;
+	padding: 15px;
+}
+#sidebar-nav .nav-item:hover {
+	background-color: var(--color-light-blue);
+}
+.sidebar-arrow-button {
+	background: rgb(33,37,41);
+	float: right;
+    background-color: 0d6efd;
+	border: none;
+	color: var(--color-off-white);
+	font-size: 20px;
+	padding: 10px;
+	width: 100%;
+	cursor: pointer;
+}
+.sidebar-arrow-button:hover {
+	background-color: var(--color-dark-blue);
 }
 
+/* Dropdown Styles */
+.dropdown-toggle { outline: 0; }
+
+/* Text Styles */
+.text-lg {
+  font-size: 18px;
+}
+.material-icons {
+	margin-right:10px;
+}
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -68,44 +114,31 @@ li {
   'opsz' 48;
   color:white;
 }
-
-
-
-#sidebar-title {
-	font-family: "Nabla";
-	font-palette: --title;
-	font-size:xx-large;
-	margin:0;
+.home-text {
+	position: relative;
+	text-align:center;
+	padding-top: 20px;
+	font-weight:750;
 }
 
-@font-palette-values --title {
-	font-family: "Nabla";
-	base-palette: 2;
-	override-colors: 6 rgb(22, 128, 170);
+/* List Styles */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  margin: 10px 0;
+  cursor: pointer;
 }
 
-.material-icons {
-	margin-right:10px;
-	
-}
-main {
-	background: rgb(255,255,255);
-	background: linear-gradient(180deg, 
-	rgba(255,255,255,1) 0%, 
-	rgba(22,128,170,1) 100%);
-}
-
+/* Footer Styles */
 .footerContainer {
 	background-color: #166888;
-	
-	
 	text-decoration:none;
 	display: flex;
-    align-items: center; /* Vertically align items */
-    background-color: #166888;
-    padding: 10px 20px; /* Padding around the container */
-	
-	
+    align-items: center;
+    padding: 10px 20px;
 }
 .footerLogo {
 	height: 20px;
@@ -114,62 +147,62 @@ main {
 	clear: left;
 	float: left;
 	margin-top: 15px;
-	margin-right: 20px; /* Margin to the right of the logo */
-	
+	margin-right: 20px;
 }
-
 .footerLinks {
     display: flex;
-    justify-content: space-between; /* Distribute the links evenly */
-    flex-grow: 1; /* Take up remaining space */
+    justify-content: space-between;
+    flex-grow: 1;
 }
 .footerLink {
     text-decoration: none;
-    color: #ffffff; /* Set the text color */
-    margin: 0 10px; /* Equal margin on the left and right */
+    color: var(--color-off-white);
+    margin: 0 10px;
     text-align: center;
 }
-.home-text {
-	position: relative;
+
+.material-icons {
+	font-size: 24px;
+	margin-right: 15px;
 }
 
-.sidebar-arrow {
-	positon: relative;
-	color:white !important;
-}
-.sidebar-arrow-button {
-	background: rgb(33,37,41);
-	float: right;
-}
-.nav-item:hover {
-	background: #84bcd2;
-}
 .nav-item {
 	border-radius: 6px;
 }
+
+.nav-item:hover {
+	background: #84bcd2;
+}
+
 #main-title {
-	
-	display:flex;
+	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 	width: 100vh;
 	margin: 0 auto;
 	text-align: center;
-	border: 2px solid white;
+	border: 2px solid var(--color-white);
 }
+@font-palette-values --title {
+	font-family: "Nabla";
+	base-palette: 2;
+	override-colors: 6 rgb(22, 128, 170);
+}
+
 .home-text {
-	text-align:center;
+	text-align: center;
 	padding-top: 20px;
-	font-weight:750;
+	font-weight: 750;
 }
 
 #scorLink, #sspLink, #sharePointLink {
 	text-decoration: none !important;
 	text-align: center;
 	margin-top: 10px;
-	color: white;
+	color: var(--color-white);
 }
+
 #scorLink {
 	flex: 1;
 }
@@ -181,11 +214,13 @@ main {
 #sharePointLink {
 	flex: 3;
 }
+
 #shareList a:link {
 	text-decoration: none;
 }
+
 #fileList {
-	display:flex;
+	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -193,14 +228,27 @@ main {
 	width: 100vh;
 	padding: 70px;
 	text-align: center;
-	border: 4px solid white;
-	margin-bottom: 20px; /* Add margin below fileList */	
+	border: 4px solid var(--color-white);
+	margin-bottom: 20px;
+}
 
-}
 #fileList a {
-    margin-right: 15px; /* Add margin to the right of each link */
-    margin-bottom: 15px; /* Add margin below each link */
+    margin-right: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: var(--color-black);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-green);
+    padding: 5px 8px;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
+
+#fileList a:hover {
+    color: var(--color-green);
+    border-bottom-color: var(--color-black);
+}
+
 #shareHeader {
 	position: relative;
 	height: 20vh;
@@ -209,130 +257,61 @@ main {
 	padding: 20px;
 }
 
-
 .shareMain {
 	height: 100vh;
-	-ms-overflow-style: none;  /* IE and Edge */
-    overflow-y: scroll; /* or "auto" if you want it to only show when necessary */
-
-
-}
-
-
-#public {
-	align-self: start;
-}
-
-#private {
-	align-self: end;
-}
-
-p {
-	font-size: 25px;
-}
-
-body, html {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-#mySideNav {
-	background-color: #2C3E50; /* Dark background for the sidebar */
-	width: 280px; 
-	height: 100vh;
-	border-right: solid 1px #34495E; /* Slightly lighter border color */
-	overflow: auto; /* In case the content exceeds the viewport height */
-}
-
-#sidebar-title {
-	font-size: 1.8em; /* Adjust title size */
-	margin: 20px 0; /* Add some margin around the title */
-	color: #ecf0f1; /* Light color for the title text */
-	text-align: center; /* Center the text */
-}
-
-#sidebar-nav .nav-item {
-	margin: 10px 0;
-}
-
-#sidebar-nav .nav-item a {
-	display: flex; /* Make the link a flex container */
-	align-items: center; /* Center items vertically */
-	padding: 15px; /* Padding around each item */
-}
-
-#sidebar-nav .nav-item:hover {
-	background-color: #34495E; /* Slightly lighter background on hover */
-}
-
-.material-icons {
-	font-size: 24px; /* Adjust icon size */
-	margin-right: 15px; /* Add some margin to the right of the icon */
+	-ms-overflow-style: none;
+    overflow-y: scroll;
 }
 
 #UserID {
 	margin: 20px 0;
 	padding: 15px;
-	color: #bdc3c7; /* Light gray color for text */
-	font-size: 14px; /* Slightly smaller text size */
-	text-align: center; /* Center text */
-}
-
-.sidebar-arrow-button {
-	background-color: 0d6efd; /* Make the button match the hover effect of list items */
-	border: none; /* Remove the border */
-	color: #ecf0f1; /* Make the arrow color light */
-	font-size: 20px; /* Adjust the arrow size */
-	padding: 10px; /* Padding around the arrow */
-	width: 100%; /* Make the button fill the width */
-	cursor: pointer; /* Change cursor to pointer */
-}
-
-.sidebar-arrow-button:hover {
-	background-color: #2C3E50; /* Slightly darker background on hover */
+	color: var(--color-off-white);
+	font-size: 14px;
+	text-align: center;
 }
 
 .function-list-container {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 }
 
 #function-list {
-text-align: center;
-font-size: 20px;
-max-width: 400px;
-margin: 0 auto;
-padding: 20px;
-border: 2px solid white;
-border-radius: 4px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	font-size: 20px;
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 2px solid var(--color-white);
+	border-radius: 4px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #function-list ul {
-list-style: none;
-padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 #function-list li {
-margin: 10px 0;
-padding: 8px;
-border: 1px solid #ccc;
-border-radius: 4px;
-cursor: pointer;
-transition: background-color 0.3s ease;
+	margin: 10px 0;
+	padding: 8px;
+	border: 1px solid var(--color-grey);
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	font-weight: bold;
+	border-bottom: 2px solid #ddd;
 }
 
 #function-list li:hover {
-background-color: #f5f5f5;
+	background-color: var(--color-light-grey);
 }
 
 input, button {
-margin: 10px;
+	margin: 10px;
 }
-
 
 /* Modal styles */
 #myModal {
@@ -354,7 +333,7 @@ margin: 10px;
     padding: 20px;
     width: 80%;
     max-width: 500px;
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -365,23 +344,6 @@ margin: 10px;
     right: 20px;
     font-size: 25px;
     cursor: pointer;
-}
-
-/* List styles */
-#function-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-#function-list li {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 2px solid #ddd;
-	font-weight:bold;
-}
-
-#function-list li:hover {
-    background-color: #f5f5f5;
 }
 
 /* Parameter input styles */
@@ -399,7 +361,7 @@ margin: 10px;
 
 #functionParameters input {
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-grey);
     border-radius: 5px;
 }
 
@@ -412,69 +374,86 @@ margin: 10px;
 button {
     margin-left: 10px;
     padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--color-green);
+    color: var(--color-white);
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button.remove {
-    background-color: #f44336;
+    background-color: var(--color-red);
 }
+
 /* Add styles for loading indicator inside the modal content */
 #loadingIndicator {
-    display: none; /* Initially hidden */
-    position: absolute; /* Absolutely position within the modal */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Ensure it is centered */
-    width: 10px; /* Setting a fixed size */
-    height: 10px; /* Setting a fixed size */
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
 }
+
 #runButton {
 	background-color: rgb(28, 131, 172);
 }
 
-#fileList a {
-  font-weight: 600; /* makes the text thicker */
-  color: #333; /* sets the text color */
-  text-decoration: none; /* removes the underline */
-  border-bottom: 2px solid #4caf50; /* adds a bottom border */
-  padding: 5px 8px; /* adds some padding */
-  display: inline-block; /* necessary for padding to take effect */
- 
-  transition: all 0.3s ease; /* makes color changes smooth */
-  margin-right: 15px; /* Add margin to the right of each link */
-    margin-bottom: 15px; /* Add margin below each link */
-}
-
-#fileList a:hover {
-  color: #4caf50; /* changes text color on hover */
-  border-bottom-color: #333; /* changes border color on hover */
-}
 #folderDiv a {
-  font-weight: 700; /* makes the text even thicker than fileList */
-  color: #2a2a2a; /* sets the text color slightly darker */
-  text-decoration: none; /* removes the underline */
-  border-bottom: 3px solid #2196f3; /* adds a bottom border with a different color */
-  padding: 6px 10px; /* adds some padding */
-  display: inline-block; /* necessary for padding to take effect */
-  margin-right: 12px; /* spaces the links apart */
-  transition: all 0.3s ease; /* makes color changes smooth */
+    font-weight: 700;
+    color: var(--color-dark-grey);
+    text-decoration: none;
+    border-bottom: 3px solid var(--color-green);
+    padding: 6px 10px;
+    display: inline-block;
+    margin-right: 12px;
+    transition: all 0.3s ease;
 }
 
 #folderDiv a:hover {
-  color: #2196f3; /* changes text color on hover */
-  border-bottom-color: #2a2a2a; /* changes border color on hover */
+    color: var(--color-green);
+    border-bottom-color: var(--color-dark-grey);
 }
+
 #function-header h3 {
-	
-    font-size: 20px; /* Set font size of the heading */
-    margin-bottom: 15px; /* Add space below the heading */
-    color: #333; /* Set text color */
-	font-family: Poppins, sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--color-black);
+	font-family: var(--font-poppins);
 }
+
+#copy-button {
+    background-color: var(--color-green);
+    border: none;
+    color: var(--color-white);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#output {
+  background-color: #1e1e1e; /* dark background color */
+  color: #d4d4d4; /* light text color */
+  padding: 20px; /* space around the text */
+  border-radius: 5px; /* rounded corners */
+  font-family: 'Courier New', Courier, monospace; /* monospace font */
+  font-size: 20px; /* font size */
+  white-space: pre-wrap; /* preserves spaces and line breaks */
+  word-wrap: break-word; /* prevents long text from overflowing */
+  overflow-x: auto; /* adds horizontal scrollbar if needed */
+  max-height: 50vh; /* maximum height before scrollbar appears */
+  width: 75%; /* set width to 75% of its container */
+  text-align: center; /* center the text horizontally */
+  margin: 0 auto; /* center the div horizontally within its container */
+  margin-top: 20px; /* Add margin above output */
+}
+
+
 /* For tablets and small laptops */
 @media screen and (max-width: 1024px) {
     #main-title, #fileList {
@@ -509,18 +488,3 @@ button.remove {
         padding: 10px; /* Reduce padding */
     }
 }
-
-  #copy-button {
-			
-            background-color: #4CAF50; /* Green background */
-            border: none; /* Remove borders */
-            color: white; /* White text */
-            padding: 15px 32px; /* Some padding */
-            text-align: center; /* Centered text */
-            text-decoration: none; /* Remove underline */
-            display: inline-block; /* Make it an inline element */
-            font-size: 16px; /* Set font size */
-            margin: 4px 2px; /* Some margin */
-            cursor: pointer; /* Add a pointer cursor on hover */
-            border-radius: 4px; /* Rounded corners */
-  }
