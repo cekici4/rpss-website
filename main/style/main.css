@@ -451,7 +451,10 @@ button.remove {
   text-align: center; /* center the text horizontally */
   margin: 0 auto; /* center the div horizontally within its container */
   margin-top: 20px; /* Add margin above output */
+  resize: both; /* make the div resizable both horizontally and vertically */
+  overflow: auto; /* needed for the resize property to work */
 }
+
 
 
 /* For tablets and small laptops */

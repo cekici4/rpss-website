@@ -236,31 +236,31 @@ async function getSecondLevelFolders(endpoint, itemName="secondLevel") {
     }
     dom.share.disabled = false;
 }
-async function getFunctionList(endpoint, itemName="functions") {
+async function getFunctionList(endpoint, itemName = "functions") {
     dom.share.disabled = true;
 
     const optionalParametersNames = [
-        'Verbose', 
-        'Debug', 
-        'ErrorAction', 
-        'WarningAction', 
-        'InformationAction', 
-        'ErrorVariable', 
-        'WarningVariable', 
-        'InformationVariable', 
-        'OutVariable', 
-        'OutBuffer', 
+        'Verbose',
+        'Debug',
+        'ErrorAction',
+        'WarningAction',
+        'InformationAction',
+        'ErrorVariable',
+        'WarningVariable',
+        'InformationVariable',
+        'OutVariable',
+        'OutBuffer',
         'PipelineVariable'
     ];
 
     try {
         const response = await fetch(endpoint);
         console.log('response-->');
-		console.log(Response);
-		
-		const functionData = await response.json();
-		console.log('functionData');
-		console.log(functionData);	
+        console.log(response);
+
+        const functionData = await response.json();
+        console.log('functionData');
+        console.log(functionData);
         if (!functionData.functions || !Array.isArray(functionData.functions)) {
             console.error('Invalid function data:', functionData);
             return;
@@ -276,101 +276,99 @@ async function getFunctionList(endpoint, itemName="functions") {
             liElement.textContent = functionName;
 
             liElement.addEventListener('click', async () => {
-                
+
                 dom.modal.style.display = "block";
 
-                
+
                 dom.selectedFunction.textContent = `Selected function: ${functionName}`;
 
-                
+
                 const syntaxResponse = await fetch(`${endpoint}/${functionName}`);
-				console.log("syntaxResponse -->")
-				console.log(syntaxResponse);
+                console.log("syntaxResponse -->")
+                console.log(syntaxResponse);
                 const syntaxData = await syntaxResponse.json();
-				console.log("syntaxData -->")
-				console.log(syntaxData);
-                const functionInfo = syntaxData.functions[0];
-				const synopsis = functionInfo.synopsis;
-					console.log("synopsis:" + synopsis);
-					dom.functionSyntax.textContent = `Synopsis: ${synopsis}`;
+                console.log("syntaxData -->")
+                console.log(syntaxData);
+                let functionInfo = syntaxData.functions[0];
+
+                const synopsis = functionInfo.synopsis;
+                console.log("synopsis:", synopsis);
+                dom.functionSyntax.textContent = `Synopsis: ${synopsis}`;
 
                 if (syntaxData && syntaxData.functions && syntaxData.functions.length > 0 && syntaxData.functions[0].parameters) {
-	console.log("true");
-					
-	console.log("functioninfo:" + functionInfo);
-					
-	const functionParametersDisplay = document.getElementById('functionParameters');
-	functionParametersDisplay.innerHTML = '';
+                    console.log("true");
 
-	const requiredParametersDiv = document.createElement('div');
-	const optionalParametersDiv = document.createElement('div');
-	const activeOptionalParametersDiv = document.createElement('div');
-	const optionalParametersList = document.createElement('ul');
+                    console.log("functioninfo:" + functionInfo);
 
-	// Initially hide optional parameters list
-	optionalParametersList.style.display = "none";
+                    const functionParametersDisplay = document.getElementById('functionParameters');
+                    functionParametersDisplay.innerHTML = '';
 
-	activeOptionalParametersDiv.innerHTML = '<h4>Active Optional Parameters:</h4>';
-	requiredParametersDiv.innerHTML = '<h4>Required Parameters:</h4>';
-	optionalParametersDiv.innerHTML = '<h4>Optional Parameters:</h4>';
+                    const requiredParametersDiv = document.createElement('div');
+                    const optionalParametersDiv = document.createElement('div');
+                    const activeOptionalParametersDiv = document.createElement('div');
+                    const optionalParametersList = document.createElement('ul');
 
-	// Create a button to toggle display of optional parameters
-	const toggleOptionalButton = document.createElement('button');
-	toggleOptionalButton.textContent = "Toggle Optional Parameters";
+                    // Initially hide optional parameters list
+                    optionalParametersList.style.display = "none";
 
-	// Toggle the display when the button is clicked
-	toggleOptionalButton.addEventListener('click', () => {
-		if (optionalParametersList.style.display === "none") {
-			optionalParametersList.style.display = "block";
-		} else {
-			optionalParametersList.style.display = "none";
-		}
-	});
+                    activeOptionalParametersDiv.innerHTML = '<h4>Active Optional Parameters:</h4>';
+                    requiredParametersDiv.innerHTML = '<h4>Required Parameters:</h4>';
+                    optionalParametersDiv.innerHTML = '<h4>Optional Parameters:</h4>';
 
-	let functionParameters = syntaxData.functions[0].parameters;
-	if (!Array.isArray(functionParameters)) {
-    functionParameters = [functionParameters];
-}
-	console.log(functionParameters);
-	functionParameters.forEach(paramObj => {
-		const paramName = paramObj.Name;
-		const paramType = paramObj.ParameterType;
+                    // Create a button to toggle display of optional parameters
+                    const toggleOptionalButton = document.createElement('button');
+                    toggleOptionalButton.textContent = "Toggle Optional Parameters";
 
-		const paramDiv = document.createElement('div');
-		paramDiv.setAttribute('data-param-name', paramName);
+                    // Toggle the display when the button is clicked
+                    toggleOptionalButton.addEventListener('click', () => {
+                        if (optionalParametersList.style.display === "none") {
+                            optionalParametersList.style.display = "block";
+                        } else {
+                            optionalParametersList.style.display = "none";
+                        }
+                    });
 
-		const paramLabel = document.createElement('label');
-		const paramInput = document.createElement('input');
+                    const functionParameters = functionInfo.parameters;
+                    console.log(functionParameters);
+                    functionParameters.forEach(paramObj => {
+                        const paramName = paramObj.Name;
+                        const paramType = paramObj.ParameterType;
 
-		paramLabel.textContent = `${paramName}:`;
-		paramInput.setAttribute('name', paramName);
-		paramInput.setAttribute('placeholder', paramType);
+                        const paramDiv = document.createElement('div');
+                        paramDiv.setAttribute('data-param-name', paramName);
 
-		paramDiv.appendChild(paramLabel);
-		paramDiv.appendChild(paramInput);
+                        const paramLabel = document.createElement('label');
+                        const paramInput = document.createElement('input');
 
-		if (!optionalParametersNames.includes(paramName)) {
-			requiredParametersDiv.appendChild(paramDiv);
-		} else {
-			const addButton = document.createElement('button');
-			addButton.textContent = '+';
-			addButton.addEventListener('click', () => {
-				activeOptionalParametersDiv.appendChild(paramDiv);
-				paramDiv.removeChild(addButton);
+                        paramLabel.textContent = `${paramName}:`;
+                        paramInput.setAttribute('name', paramName);
+                        paramInput.setAttribute('placeholder', paramType);
 
-				const removeButton = document.createElement('button');
-				removeButton.textContent = '-';
-				removeButton.addEventListener('click', () => {
-					optionalParametersList.appendChild(paramDiv);
-					paramDiv.removeChild(removeButton);
-					paramDiv.appendChild(addButton);
-				});
-				paramDiv.appendChild(removeButton);
-			});
-			paramDiv.appendChild(addButton);
-			optionalParametersList.appendChild(paramDiv);
-		}
-	});
+                        paramDiv.appendChild(paramLabel);
+                        paramDiv.appendChild(paramInput);
+
+                        if (!optionalParametersNames.includes(paramName)) {
+                            requiredParametersDiv.appendChild(paramDiv);
+                        } else {
+                            const addButton = document.createElement('button');
+                            addButton.textContent = '+';
+                            addButton.addEventListener('click', () => {
+                                activeOptionalParametersDiv.appendChild(paramDiv);
+                                paramDiv.removeChild(addButton);
+
+                                const removeButton = document.createElement('button');
+                                removeButton.textContent = '-';
+                                removeButton.addEventListener('click', () => {
+                                    optionalParametersList.appendChild(paramDiv);
+                                    paramDiv.removeChild(removeButton);
+                                    paramDiv.appendChild(addButton);
+                                });
+                                paramDiv.appendChild(removeButton);
+                            });
+                            paramDiv.appendChild(addButton);
+                            optionalParametersList.appendChild(paramDiv);
+                        }
+                    });
 
                     optionalParametersDiv.appendChild(toggleOptionalButton);
                     optionalParametersDiv.appendChild(optionalParametersList);
@@ -378,7 +376,7 @@ async function getFunctionList(endpoint, itemName="functions") {
                     functionParametersDisplay.appendChild(activeOptionalParametersDiv);
                     functionParametersDisplay.appendChild(optionalParametersDiv);
 
-                    
+
                     // Implementation of the Run button
                     const runButton = document.getElementById('runButton');
                     runButton.onclick = async () => {
@@ -424,7 +422,7 @@ async function getFunctionList(endpoint, itemName="functions") {
                             dom.outputList.style.display = "block";
                             dom.copyDiv.style.display = "block";
                             dom.outputDiv.innerText = responseData;
-                         
+
                             // Close the modal
                             dom.modal.style.display = "none";
 
