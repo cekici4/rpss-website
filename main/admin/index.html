@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RPSS Admin Page</title>
+    </head>
+    <body>
+        <h1>Run PowerShell Scripts (RPSS)</h1>
+        <h2>Admin Page</h2>
+        
+        <form action="runScript" method="post">
+            <div>
+                <label for="scriptText">Enter PowerShell Script:</label>
+                <textarea id="scriptText" name="scriptText" rows="4" cols="50">
+                # Write your PowerShell script here...
+                </textarea>
+            </div>
+            <input type="submit" value="Run Script">
+        </form>
+
+        <div>
+            <label for="output">Output:</label>
+            <textarea id="output" name="output" rows="4" cols="50" readonly>
+            </textarea>
+        </div>
+    </body>
+</html>
