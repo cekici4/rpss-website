@@ -10,7 +10,7 @@ var dom = dom || {
     share: document.getElementById('share'),
     selectedFunction: document.getElementById('selectedFunctionName'),
     modal: document.getElementById('myModal'),
-    functionSyntax: document.getElementById('functionSyntax'),
+    functionSynopsis: document.getElementById('functionSynopsis'),
     functionParameters: document.getElementById('functionParameters'),
     runButton: document.getElementById('runButton'),
     loadingIndicator: document.getElementById('loadingIndicator'),
@@ -236,6 +236,7 @@ async function getSecondLevelFolders(endpoint, itemName="secondLevel") {
     }
     dom.share.disabled = false;
 }
+
 async function getFunctionList(endpoint, itemName = "functions") {
     dom.share.disabled = true;
 
@@ -292,8 +293,8 @@ async function getFunctionList(endpoint, itemName = "functions") {
                 let functionInfo = syntaxData.functions[0];
 
                 const synopsis = functionInfo.synopsis;
-                console.log("synopsis:", synopsis);
-                dom.functionSyntax.textContent = `Synopsis: ${synopsis}`;
+				console.log("synopsis:", synopsis);
+				dom.functionSynopsis.textContent = `Synopsis: ${synopsis}`;
 
                 if (syntaxData && syntaxData.functions && syntaxData.functions.length > 0 && syntaxData.functions[0].parameters) {
                     console.log("true");
@@ -302,7 +303,7 @@ async function getFunctionList(endpoint, itemName = "functions") {
 
                     const functionParametersDisplay = document.getElementById('functionParameters');
                     functionParametersDisplay.innerHTML = '';
-
+					
                     const requiredParametersDiv = document.createElement('div');
                     const optionalParametersDiv = document.createElement('div');
                     const activeOptionalParametersDiv = document.createElement('div');

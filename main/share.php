@@ -32,9 +32,7 @@
 			<div id="function-header">
 				<h3>The functions that are available inside this module are listed below.</h3>
 			</div>
-			<div id="function-list"> 
-			
-			</div>
+			<div id="function-list"></div>
 			
 			<div id="output" style=""> </div>	
 			 <button id="copy-button"><i class="fas fa-clipboard"></i>  Copy</button>
@@ -45,7 +43,7 @@
 	<div class="modal-content">
 		<span class="close">&times;</span>
 		<h2 id="selectedFunctionName"></h2>
-		<div id="functionSyntax"></div>
+		<div id="functionSynopsis"></div>
 		<div id="functionParameters"></div>
 		<button id="runButton">Run</button>
 		<div id="loadingIndicator" style="display: none;">
