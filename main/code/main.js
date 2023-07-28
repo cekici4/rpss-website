@@ -32,7 +32,7 @@ var breadcrumbTrail = breadcrumbTrail || [];
 function createParameterModal() {
   const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
   myModal.toggle();
-  console.log('run');
+  
 }
 
 // Function to render the breadcrumb trail on the page
@@ -54,7 +54,7 @@ function handleFolderClick(event) {
     // Modify this line to correctly build the folderEndpoint URL
     const folderEndpoint = target.dataset.url ? `https://rpss:8443${target.dataset.url}` : target.href;
     
-    console.log('Folder endpoint:', folderEndpoint);
+    
     
     // Determine which function to call based on the level of the folder
     if (breadcrumbTrail.length === 1) {
@@ -114,8 +114,7 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0, itemNa
                 // Append the newly created list div to the file list div
                 dom.fileListDiv.appendChild(ListDiv);
 
-                // Log for debugging
-                console.log('file event created');
+                
                 
                 // Add event listener for click events on the file list div
                 dom.fileListDiv.addEventListener('click', async (event) => {
@@ -128,7 +127,7 @@ async function getContent(endpoint = 'https://rpss:8443/share', type = 0, itemNa
                     
                     // Check if the target was a file
                     if (target.dataset.type === 'file') { 
-                        console.log('ran');
+                        
                         
                         // Clear any existing content in the output div
                         dom.outputDiv.innerHTML = '';
@@ -199,8 +198,7 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share', itemNa
         // Parse the response as JSON to get the list of first level folders
         const folderList = await response.json();
 
-        // Log the list of first level folders for debugging
-        console.log('First level folder list:', folderList);
+        
 
         // Create an unordered list element to hold the list of folders
         const folderListDiv = document.createElement('ul');
@@ -212,8 +210,7 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share', itemNa
             const folderNameLI = document.createElement('li');
             const folderNameA = document.createElement('a');
 
-            // Log the current folder for debugging
-            console.log(folder);
+            
 
             // Set the innerHTML of the anchor to the folder name and set its href attribute
             folderNameA.innerHTML = folder.fileName;
@@ -243,8 +240,7 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share', itemNa
             // Check if the target of the click was a link (an anchor tag)
             if (target.tagName === 'A') {
 
-                // Log the href of the clicked link for debugging
-                console.log('Clicked second level folder link:', target.href);
+                
 
                 // Get the folder name from the text content of the target
                 const folderName = target.textContent;
@@ -260,8 +256,7 @@ async function getFirstLevelFolders(endpoint = 'https://rpss:8443/share', itemNa
                 // Construct the URL for the folder endpoint from the dataset URL of the target, if it exists
                 const folderEndpoint = target.dataset.url ? `https://rpss:8443${target.dataset.url}` : target.href;
 
-                // Log the URL of the folder endpoint for debugging
-                console.log('Second level folder endpoint:', folderEndpoint);
+                
 
                 // Fetch and display the function list for the clicked folder
                 await getFunctionList(folderEndpoint);
@@ -297,8 +292,7 @@ async function getSecondLevelFolders(endpoint, itemName="secondLevel") {
         // Parse the response as JSON to get the list of second level folders
         const secondLevelFolderList = await response.json();
 
-        // Log the list of second level folders for debugging
-        console.log('Second level folder list:', secondLevelFolderList);
+        
 
         // Create an unordered list element to hold the list of folders
         const secondLevelFolderListDiv = document.createElement('ul');
@@ -338,14 +332,12 @@ async function getSecondLevelFolders(endpoint, itemName="secondLevel") {
             // Check if the target of the click was a link (an anchor tag)
             if (target.tagName === 'A') {
 
-                // Log the href of the clicked link for debugging
-                console.log('Clicked second level folder link:', target.href);
+               
 
                 // Construct the URL for the folder endpoint from the dataset URL of the target, if it exists
                 const folderEndpoint = target.dataset.url ? `https://rpss:8443${target.dataset.url}` : target.href;
 
-                // Log the URL of the folder endpoint for debugging
-                console.log('Second level folder endpoint:', folderEndpoint);
+                
 					
                 // Fetch and display the function list for the clicked folder
                 await getFunctionList(folderEndpoint);
@@ -390,16 +382,11 @@ async function getFunctionList(endpoint, itemName = "functions") {
         // Fetch the response from the endpoint
         const response = await fetch(endpoint);
 
-        // Log the response
-        console.log('response-->');
-        console.log(response);
 
         // Convert the response to JSON
         const functionData = await response.json();
 
-        // Log the function data
-        console.log('functionData');
-        console.log(functionData);
+     
 
         // Check if functionData is valid
         if (!functionData.functions || !Array.isArray(functionData.functions)) {
@@ -434,34 +421,25 @@ async function getFunctionList(endpoint, itemName = "functions") {
                 // Fetch the syntax for the selected function
                 const syntaxResponse = await fetch(`${endpoint}/${functionName}`);
 
-                // Log the syntax response
-                console.log("syntaxResponse -->")
-                console.log(syntaxResponse);
 
                 // Convert the syntax response to JSON
                 const syntaxData = await syntaxResponse.json();
 
-                // Log the syntax data
-                console.log("syntaxData -->")
-                console.log(syntaxData);
+                
 
                 // Get the function info from syntaxData
                 let functionInfo = syntaxData.functions[0];
 
                 // Get the synopsis from the function info
                 const synopsis = functionInfo.synopsis;
-                console.log("synopsis:", synopsis);
+                
 
                 // Display the function synopsis
                 dom.functionSynopsis.textContent = `Synopsis: ${synopsis}`;
 
                 // If syntaxData contains valid function parameters
                 if (syntaxData && syntaxData.functions && syntaxData.functions.length > 0 && syntaxData.functions[0].parameters) {
-                    // Log a message indicating this
-                    console.log("true");
-
-                    // Log the function info
-                    console.log("functioninfo:" + functionInfo);
+                    
 
                     // Get the display element for function parameters
                     const functionParametersDisplay = document.getElementById('functionParameters');
@@ -500,7 +478,8 @@ async function getFunctionList(endpoint, itemName = "functions") {
 
                     // Get the parameters from the function info
                     const functionParameters = functionInfo.parameters;
-                    console.log(functionParameters);
+                    
+				
 
                     // Loop through each parameter object
                     functionParameters.forEach(paramObj => {
@@ -609,7 +588,7 @@ async function getFunctionList(endpoint, itemName = "functions") {
 
                             // Convert the response to text
                             const responseData = await response.text();
-                            console.log('Server Response:', responseData);
+                            
 
                             // Display the server response
                             dom.outputList.style.display = "block";
